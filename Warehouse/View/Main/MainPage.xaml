@@ -58,7 +58,7 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             <DataGrid 
                 Height="500" 
                 Width="800" 
-                Margin="50,31,50,73" 
+                Margin="50,30,50,70" 
                 x:Name="ClientGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -93,42 +93,42 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#19000000">
             <StackPanel>
                 <Grid Height="150">
-                    <Button x:Name="ButtonCloseMenu" Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
-                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="#FF1B3861" Width="25" Height="25"/>
+                    <Button x:Name="ButtonCloseMenu" Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click" Background="#66673AB7">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="#FF003B75" Width="25" Height="25"/>
                     </Button>
-                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click">
-                        <materialDesign:PackIcon Kind="Menu" Foreground="#FF1B3861" Width="25" Height="25"/>
+                    <Button x:Name="ButtonOpenMenu" Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonOpenMenu_Click" Background="#66673AB7">
+                        <materialDesign:PackIcon Kind="Menu" Foreground="#FF003B75" Width="25" Height="25"/>
                     </Button>
                 </Grid>
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF1368BD">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF003B75">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="NewspaperPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Заказы" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="ClipboardAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Сотрудники" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="BookAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Поставщики" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="PackageVariantPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Продукты" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="AdminRegistration" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="AccountPlusOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Зарегистрировать" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
