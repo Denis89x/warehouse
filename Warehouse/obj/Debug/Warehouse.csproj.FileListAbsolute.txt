@@ -19,12 +19,10 @@ C:\Производственная практика\Warehouse\Warehouse\bin\Deb
 C:\Производственная практика\Warehouse\Warehouse\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.AssemblyReference.cache
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.SuggestedBindingRedirects.cache
-C:\Производственная практика\Warehouse\Warehouse\obj\Debug\MainWindow.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\App.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse_MarkupCompile.cache
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse_MarkupCompile.lref
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\App.baml
-C:\Производственная практика\Warehouse\Warehouse\obj\Debug\MainWindow.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.g.resources
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.Properties.Resources.resources
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.GenerateResource.cache
@@ -32,3 +30,5 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.csproj.CopyComplete
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.exe
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.pdb
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\MainWindow.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\MainWindow.baml

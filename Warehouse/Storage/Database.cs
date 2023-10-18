@@ -30,5 +30,23 @@ namespace Warehouse
             dataGrid.ItemsSource = dataTable.DefaultView;
             Open();
         }
+
+        public int CountUsersWithLogin(string username)
+        {
+            Open();
+            SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}'", sqlConnection);
+            int count = (int)command.ExecuteScalar();
+            Open();
+            return count;
+        }
+
+        public void Update(string query)
+        {
+            if (sqlConnection.State == ConnectionState.Closed)
+                Open();
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+            command.ExecuteNonQuery();
+            Open();
+        }
     }
 }

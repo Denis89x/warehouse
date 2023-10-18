@@ -19,7 +19,7 @@
             Height="55px"
             Width="55px"
             HorizontalAlignment="Center"
-            Margin="0 30 10 0"
+            Margin="0 25 18 0"
             Kind="AccountPlusOutline" Foreground="White" />
         <Border Background="White" CornerRadius="10" BorderBrush="Black" Height="350px" Width="300px" Padding="10">
             <Border.Effect>
@@ -39,31 +39,34 @@
             VerticalAlignment="Bottom" 
             Content="Зарегистрироваться"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 0 0 135" >
+            Margin="0 0 0 125" Click="RegistrationButton_Click" >
         </Button>
         <TextBox
+            x:Name="UsernameBox"
             materialDesign:HintAssist.Hint="Username"
             FontSize="15px"
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0 0 0 125" BorderBrush="#BC989393" />
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0 0 0 125" 
+            BorderBrush="#BC989393" />
         <PasswordBox
-            x:Name="FirstPassword"
+            x:Name="SecondPassword"
             materialDesign:HintAssist.Hint="Repeat the password"
             FontSize="15px"
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 90 0 0" BorderBrush="#BC989393" />
+            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 90 0 0" 
+            BorderBrush="#BC989393" />
         <PasswordBox
-            x:Name="SecondPassword"
+            x:Name="FirstPassword"
             materialDesign:HintAssist.Hint="Password"
             FontSize="15px"
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 0 0 10" BorderBrush="#BC989393" />
+            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 0 0 10" BorderBrush="#BC989393" Password="" />
         <Label 
             FontSize="18px"
             x:Name="RegistrationLabel"
@@ -74,6 +77,15 @@
             VerticalAlignment="Top"
             Margin="0 135 0 0">
         </Label>
-
+        <CheckBox
+            x:Name="AdminBox"
+            Content="Admin"
+            IsChecked="False"
+            HorizontalAlignment="Center"
+            Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"
+            Margin="160 175 0 0" 
+            BorderBrush="#FF249AD7" 
+            Foreground="#BC989393" 
+            Background="#FF249AD7"/>
     </Grid>
 </Window>
