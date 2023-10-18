@@ -32,3 +32,5 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Warehouse.pdb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\MainWindow.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\MainWindow.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\AuthPage.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Auth\AuthPage.baml

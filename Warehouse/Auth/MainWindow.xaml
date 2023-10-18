@@ -20,7 +20,8 @@
             Width="55px"
             HorizontalAlignment="Center"
             Margin="0 25 18 0"
-            Kind="AccountPlusOutline" Foreground="White" />
+            Kind="AccountPlusOutline" 
+            Foreground="White" />
         <Border Background="White" CornerRadius="10" BorderBrush="Black" Height="350px" Width="300px" Padding="10">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" Color="Black" Opacity="0.3" BlurRadius="15" Direction="360" RenderingBias="Quality"/>
@@ -87,5 +88,9 @@
             BorderBrush="#FF249AD7" 
             Foreground="#BC989393" 
             Background="#FF249AD7"/>
+        <Button 
+            Width="50px"
+            HorizontalAlignment="Left" Click="Button_Click">
+        </Button>
     </Grid>
 </Window>

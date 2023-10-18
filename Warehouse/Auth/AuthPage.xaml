@@ -1,0 +1,91 @@
+﻿<Window x:Class="Warehouse.Auth.AuthPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.Auth"
+        mc:Ignorable="d"
+        Height="600" Width="650"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="#FF22A4E8"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <materialDesign:PackIcon 
+            Height="55px"
+            Width="55px"
+            HorizontalAlignment="Center"
+            Margin="0 25 18 0"
+            Kind="AccountArrowUpOutline"
+            Foreground="White"/>
+        <Border 
+            Background="White"
+            CornerRadius="10" 
+            BorderBrush="Black"
+            Height="275px" 
+            Width="300px" 
+            Padding="10">
+            <Border.Effect>
+                <DropShadowEffect 
+                    ShadowDepth="0" 
+                    Color="Black" 
+                    Opacity="0.3" 
+                    BlurRadius="15" 
+                    Direction="360" 
+                    RenderingBias="Quality"/>
+            </Border.Effect>
+        </Border>
+        <Label 
+            FontSize="18px"
+            x:Name="RegistrationLabel"
+            Width="120px"
+            Height="30px"
+            Content="Авторизация"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0 165 0 0">
+        </Label>
+        <TextBox
+            x:Name="UsernameBox"
+            materialDesign:HintAssist.Hint="Username"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 85" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <PasswordBox
+            x:Name="Password"
+            materialDesign:HintAssist.Hint="Repeat the password"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" 
+            Margin="0 10 0 0" 
+            BorderBrush="#BC989393">
+        </PasswordBox>
+        <Button
+            x:Name="AuthorizationButton"
+            Width="225px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Content="Авторизоваться"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 0 0 160" 
+            Click="AuthorizationButton_Click">
+        </Button>
+    </Grid>
+</Window>

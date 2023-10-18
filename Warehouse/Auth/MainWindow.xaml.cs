@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Windows;
+using Warehouse.Auth;
+using Warehouse.Service;
 
 namespace Warehouse
 {
@@ -22,10 +21,11 @@ namespace Warehouse
 
             if (firstPassword.Equals(secondPassword)) 
             {
-                if (new Database().CountUsersWithLogin(username) == 0)
+                Database database = new Database();
+                if (database.CountUsersWithLogin(username) == 0)
                 {
-                    string query = $"INSERT INTO Account (username, password, role) VALUES ('{username}', '{GetSHA256Hash(firstPassword)}', '{role}')";
-                    new Database().Update(query);
+                    string query = $"INSERT INTO Account (username, password, role) VALUES ('{username}', '{PasswordEncoder.GetSHA256Hash(firstPassword)}', '{role}')";
+                    database.Update(query);
                 }
                 else
                 {
@@ -47,21 +47,11 @@ namespace Warehouse
                 return "ROLE_USER";
         }
 
-        public string GetSHA256Hash(string input)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = sha256.ComputeHash(bytes);
-
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    builder.Append(hashBytes[i].ToString("x2"));
-                }
-
-                return builder.ToString();
-            }
+            AuthPage auth = new AuthPage();
+            auth.Show();
+            this.Hide();
         }
     }
 }

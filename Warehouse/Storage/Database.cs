@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Controls;
+using Warehouse.Service;
 
 namespace Warehouse
 {
@@ -38,6 +39,16 @@ namespace Warehouse
             int count = (int)command.ExecuteScalar();
             Open();
             return count;
+        }
+
+        public bool Check(string username, string password)
+        {
+            Open();
+            SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}' AND Password='{PasswordEncoder.GetSHA256Hash(password)}'", sqlConnection);
+            int result = (int)command.ExecuteScalar();
+            Open();
+
+            return result > 0;
         }
 
         public void Update(string query)
