@@ -19,7 +19,7 @@
             Height="55px"
             Width="55px"
             HorizontalAlignment="Center"
-            Margin="0 25 18 0"
+            Margin="0 35 0 0"
             Kind="AccountArrowUpOutline"
             Foreground="White"/>
         <Border 

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Warehouse.Storage;
+using Warehouse.View.Main;
 
 namespace Warehouse.Auth
 {
@@ -21,7 +22,9 @@ namespace Warehouse.Auth
             if (isAuth)
             {
                 AuthManager.CurrentUsername = username;
-                MessageBox.Show($"Auth: {AuthManager.CurrentUsername}");
+                MainPage mainPage = new MainPage();
+                this.Hide();
+                mainPage.Show();
             } else
             {
                 MessageBox.Show("Неверный логин или пароль");
