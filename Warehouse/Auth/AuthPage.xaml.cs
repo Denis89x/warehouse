@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Warehouse.Service;
 using Warehouse.Storage;
 using Warehouse.View.Main;
 
@@ -6,6 +7,8 @@ namespace Warehouse.Auth
 {
     public partial class AuthPage : Window
     {
+        ValidationFileds validationFileds = new ValidationFileds();
+
         public AuthPage()
         {
             InitializeComponent();
@@ -25,7 +28,8 @@ namespace Warehouse.Auth
                 MainPage mainPage = new MainPage();
                 this.Hide();
                 mainPage.Show();
-            } else
+            }
+            else
             {
                 MessageBox.Show("Неверный логин или пароль");
             }

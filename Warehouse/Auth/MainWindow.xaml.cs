@@ -6,6 +6,8 @@ namespace Warehouse
 {
     public partial class MainWindow : Window
     {
+        ValidationFileds validationFileds = new ValidationFileds();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -17,34 +19,23 @@ namespace Warehouse
             string firstPassword = FirstPassword.Password;
             string secondPassword = SecondPassword.Password;
             bool isAdmin = (bool) AdminBox.IsChecked;
-            string role = ReturnRole(isAdmin);
+            string role = validationFileds.ReturnRole(isAdmin);
 
-            if (firstPassword.Equals(secondPassword)) 
+            if (validationFileds.ValidationRegistrationFields(username.ToLower(), firstPassword, secondPassword)) 
             {
                 Database database = new Database();
                 if (database.CountUsersWithLogin(username) == 0)
                 {
-                    string query = $"INSERT INTO Account (username, password, role) VALUES ('{username}', '{PasswordEncoder.GetSHA256Hash(firstPassword)}', '{role}')";
+                    string query = $"INSERT INTO Account (username, password, role) VALUES ('{username.ToLower()}', '{PasswordEncoder.GetSHA256Hash(firstPassword)}', '{role}')";
                     database.Update(query);
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Пользователь с таким логином уже существует!");
                     return;
                 }
-            } else
-            {
-                MessageBox.Show($"Пароли не совпадают!");
-                return;
             }
-        }
-
-        private string ReturnRole(bool isAdmin)
-        {
-            if (isAdmin)
-                return "ROLE_ADMIN";
-            else
-                return "ROLE_USER";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

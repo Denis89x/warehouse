@@ -36,7 +36,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}'", sqlConnection);
-            int count = (int)command.ExecuteScalar();
+            int count = (int) command.ExecuteScalar();
             Connection();
             return count;
         }
@@ -45,7 +45,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}' AND Password='{PasswordEncoder.GetSHA256Hash(password)}'", sqlConnection);
-            int result = (int)command.ExecuteScalar();
+            int result = (int) command.ExecuteScalar();
             Connection();
 
             return result > 0;
@@ -55,7 +55,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}' AND role='ROLE_ADMIN'", sqlConnection);
-            int result = (int)command.ExecuteScalar();
+            int result = (int) command.ExecuteScalar();
             Connection();
 
             return result > 0;

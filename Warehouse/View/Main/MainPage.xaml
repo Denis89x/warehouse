@@ -6,15 +6,17 @@
         xmlns:local="clr-namespace:Warehouse.View.Main"
         mc:Ignorable="d"
         Title="Складской учёт" 
-        Height="620" 
-        Width="1050"
-xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        MinHeight="720"
+        MinWidth="1050"
+        Closing="Window_Closing"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <LinearGradientBrush.RelativeTransform>
@@ -53,12 +55,10 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     </Window.Triggers>
     <Grid>
         <Grid
-            Width="900"
-            HorizontalAlignment="Right">
-            <DataGrid 
-                Height="500" 
-                Width="800" 
-                Margin="50,30,50,70" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <DataGrid   
+                Margin="160,30,30,30" 
                 x:Name="ClientGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -86,6 +86,9 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                         <MenuItem x:Name="DeleteClient"  Header="Удалить">
 
                         </MenuItem>
+                        <MenuItem x:Name="Add" Header="Добавить">
+                            
+                        </MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -104,31 +107,49 @@ xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="NewspaperPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Заказы" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Заказы" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ClipboardAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Сотрудники" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Сотрудники" VerticalAlignment="Center" Margin="0 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountSchoolOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Должности" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Поставщики" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Поставщики" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageVariantPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Продукты" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Продукты" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="AdminRegistration" Height="60">
+                    <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="PackageVariant" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Тип продукта" VerticalAlignment="Center" Margin="0 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CogOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Тип продукта" VerticalAlignment="Center" Margin="0 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="AdminRegistration" Height="60" PreviewMouseLeftButtonDown="AdminRegistration_MouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="AccountPlusOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Зарегистрировать" VerticalAlignment="Center" Margin="20 10"/>
+                            <TextBlock Text="Регистрация" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

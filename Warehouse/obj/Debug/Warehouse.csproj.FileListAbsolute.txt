@@ -49,3 +49,5 @@ C:\Производственная практика\Warehouse\Warehouse\bin\Deb
 C:\Производственная практика\Warehouse\Warehouse\bin\Debug\ru-ru\MaterialDesignExtensions.resources.dll
 C:\Производственная практика\Warehouse\Warehouse\bin\Debug\uz-Latn-UZ\MaterialDesignExtensions.resources.dll
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\Main\MainPage.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Profile\PrfSettings.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Profile\PrfSettings.baml

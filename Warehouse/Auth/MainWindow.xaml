@@ -13,7 +13,9 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="#FF22A4E8"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        ResizeMode="CanMinimize"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <materialDesign:PackIcon 
             Height="55px"
@@ -38,7 +40,7 @@
             BorderBrush="Transparent"
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
-            Content="Зарегистрироваться"
+            Content="Зарегистрировать"
             RenderOptions.EdgeMode="Aliased"
             Margin="0 0 0 125" Click="RegistrationButton_Click" >
         </Button>
@@ -90,7 +92,9 @@
             Background="#FF249AD7"/>
         <Button 
             Width="50px"
-            HorizontalAlignment="Left" Click="Button_Click">
+            HorizontalAlignment="Left" 
+            Click="Button_Click"
+            Visibility="Collapsed">
         </Button>
     </Grid>
 </Window>

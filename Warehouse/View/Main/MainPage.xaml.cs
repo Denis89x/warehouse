@@ -1,16 +1,16 @@
-﻿using System.Windows;
+﻿using System.Web.Configuration;
+using System.Windows;
+using Warehouse.Profile;
 using Warehouse.Storage;
 
 namespace Warehouse.View.Main
 {
     public partial class MainPage : Window
     {
-        Database database;
-
         public MainPage()
         {
             InitializeComponent();
-            database = new Database();
+            Database database = new Database();
             if (AuthManager.CurrentUsername != null)
             {
                 bool isAdmin = database.CheckAdmin(AuthManager.CurrentUsername);
@@ -22,7 +22,6 @@ namespace Warehouse.View.Main
                     AdminRegistration.Visibility = Visibility.Visible;
                 }
             }
-            
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -35,6 +34,23 @@ namespace Warehouse.View.Main
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void AdminRegistration_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PrfSettings settings = new PrfSettings();
+            settings.ShowDialog();
         }
     }
 }
