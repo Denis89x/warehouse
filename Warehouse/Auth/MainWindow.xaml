@@ -30,9 +30,10 @@
             </Border.Effect>
         </Border>
         <Button
-            x:Name="RegistrationButton"
-            Width="225px"
-            Height="45px"
+            x:Name="Back"
+            Width="105px"
+            Height="45px"           
+            Visibility="Collapsed"
             materialDesign:ButtonAssist.CornerRadius="20"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
@@ -40,9 +41,26 @@
             BorderBrush="Transparent"
             HorizontalAlignment="Center" 
             VerticalAlignment="Bottom" 
-            Content="Зарегистрировать"
+            Content="Назад"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 0 0 125" Click="RegistrationButton_Click" >
+            Margin="0 0 120 125" Click="Back_Click">
+        </Button>
+        <Button
+            x:Name="RegistrationButton"
+            Width="105px"
+            Height="45px"             
+            Visibility="Collapsed"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Content="Сохранить"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 0 0 125" 
+            Click="RegistrationButton_Click">
         </Button>
         <TextBox
             x:Name="UsernameBox"
@@ -51,16 +69,8 @@
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0 0 0 125" 
-            BorderBrush="#BC989393" />
-        <PasswordBox
-            x:Name="SecondPassword"
-            materialDesign:HintAssist.Hint="Repeat the password"
-            FontSize="15px"
-            Padding="12 10 2 2"
-            Height="40px"
-            Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 90 0 0" 
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 125" 
             BorderBrush="#BC989393" />
         <PasswordBox
             x:Name="FirstPassword"
@@ -69,7 +79,19 @@
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" Margin="0 0 0 10" BorderBrush="#BC989393" Password="" />
+            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" 
+            Margin="0 0 0 10" 
+            BorderBrush="#BC989393"/>
+        <PasswordBox
+            x:Name="SecondPassword"
+            materialDesign:HintAssist.Hint="Repeat the password"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedPasswordBox}" 
+            Margin="0 90 0 0" 
+            BorderBrush="#BC989393" />
         <Label 
             FontSize="18px"
             x:Name="RegistrationLabel"
@@ -95,6 +117,55 @@
             HorizontalAlignment="Left" 
             Click="Button_Click"
             Visibility="Collapsed">
+        </Button>
+        <TextBox
+            x:Name="SecondName"
+            materialDesign:HintAssist.Hint="Фамилия"
+            Visibility="Collapsed"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 125" 
+            BorderBrush="#BC989393" />
+        <TextBox
+            x:Name="FirstName"
+            materialDesign:HintAssist.Hint="Имя"
+            Visibility="Collapsed"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 10" 
+            BorderBrush="#BC989393" />
+        <TextBox
+            x:Name="MiddleName"
+            materialDesign:HintAssist.Hint="Отчество"
+            Visibility="Collapsed"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 90 0 0" 
+            BorderBrush="#BC989393" />
+        <Button
+            x:Name="NextButton"
+            Width="225px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Bottom" 
+            Content="Дальше"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 0 0 125" 
+            Click="NextButton_Click">
         </Button>
     </Grid>
 </Window>

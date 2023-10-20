@@ -34,5 +34,12 @@ namespace Warehouse.Auth
                 MessageBox.Show("Неверный логин или пароль");
             }
         }
+
+        private void Registr_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow main = new MainWindow();
+            main.Show();
+        }
     }
 }
