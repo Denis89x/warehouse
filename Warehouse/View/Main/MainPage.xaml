@@ -59,6 +59,7 @@
             VerticalAlignment="Stretch">
             <DataGrid   
                 Margin="160,30,30,30" 
+                Visibility="Collapsed"
                 x:Name="ClientGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -92,6 +93,38 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
+            <DataGrid   
+                Margin="160,30,30,30" 
+                Visibility="Visible"
+                x:Name="ProductTypeGrid" 
+                AutoGenerateColumns="false"
+                CanUserResizeColumns="False" 
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                CanUserReorderColumns="False" 
+                SelectionMode="Single" 
+                SelectionUnit="FullRow" 
+                CanUserResizeRows="False" 
+                IsReadOnly="True"
+                Foreground="#FF7643D2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ProductTypeId" Binding="{Binding product_type_id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Наименование" Width="*" Binding="{Binding type_name}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="EditProductType" Header="Редактировать">
+
+                        </MenuItem>
+                        <MenuItem x:Name="DeleteProductType"  Header="Удалить">
+
+                        </MenuItem>
+                        <MenuItem x:Name="AddProductType" Header="Добавить">
+
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#19000000">
             <StackPanel>
@@ -107,19 +140,7 @@
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="NewspaperPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Заказы" VerticalAlignment="Center" Margin="0 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ClipboardAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Сотрудники" VerticalAlignment="Center" Margin="0 10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountSchoolOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Должности" VerticalAlignment="Center" Margin="0 10"/>
+                            <TextBlock Text="Заказ" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">

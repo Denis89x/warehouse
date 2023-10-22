@@ -29,8 +29,7 @@ namespace Warehouse
                 Database database = new Database();
                 if (database.CountUsersWithLogin(username) == 0)
                 {
-                    string query = $"INSERT INTO Account (username, password, role, surname, first_name, middle_name) VALUES ('{username.ToLower()}', '{PasswordEncoder.GetSHA256Hash(firstPassword)}', '{role}', N'{surname.ToLower()}', N'{firstName.ToLower()}', N'{middleName.ToLower()}')";
-                    database.Update(query);
+                    database.RegisterAccount(username, firstPassword, role, surname, firstName, middleName);
                     this.Close();
                 }
                 else

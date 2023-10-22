@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows.Controls;
 using Warehouse.Service;
+using Warehouse.Storage;
 
 namespace Warehouse
 {
@@ -59,6 +60,30 @@ namespace Warehouse
             Connection();
 
             return result > 0;
+        }
+
+        public void RegisterAccount(string username, string password, string role, string surname, string firstName, string middleName)
+        {
+            string query = $"INSERT INTO Account (username, password, role, surname, first_name, middle_name) VALUES ('{username.ToLower()}', '{PasswordEncoder.GetSHA256Hash(password)}', '{role}', N'{surname.ToLower()}', N'{firstName.ToLower()}', N'{middleName.ToLower()}')";
+            Update(query);
+        }
+
+        public void UpdateUsername(string username)
+        {
+            string query = $"UPDATE Account SET username = '{username.ToLower()}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}'";
+            Update(query);
+        }
+
+        public void UpdatePassword(string password)
+        {
+            string query = $"UPDATE Account SET password = '{PasswordEncoder.GetSHA256Hash(password)}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}'";
+            Update(query);
+        }
+
+        public void UpdateUsernameAndPassword(string username, string password)
+        {
+            string query = $"UPDATE Account SET username = '{username.ToLower()}', password = '{password}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}' AND password = '{PasswordEncoder.GetSHA256Hash(password)}'";
+            Update(query);
         }
 
         public void Update(string query)

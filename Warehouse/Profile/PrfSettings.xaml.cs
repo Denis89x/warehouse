@@ -28,8 +28,7 @@ namespace Warehouse.Profile
                     Database database = new Database();
                     if (database.CountUsersWithLogin(newUsername) == 0)
                     {
-                        string query = $"UPDATE Account SET username = '{newUsername.ToLower()}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}'";
-                        database.Update(query);
+                        database.UpdateUsername(newUsername);
                         AuthManager.CurrentUsername = newUsername;
                         MessageBox.Show("Данные успешно обновлены!");
                         Thread.Sleep(300);
@@ -49,8 +48,7 @@ namespace Warehouse.Profile
                     Database database = new Database();
                     if (database.Check(AuthManager.CurrentUsername, currentPassword))
                     {
-                        string query = $"UPDATE Account SET password = '{PasswordEncoder.GetSHA256Hash(newPassword)}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}'";
-                        database.Update(query);
+                        database.UpdatePassword(newPassword);
                         MessageBox.Show("Данные успешно обновлены!");
                         Thread.Sleep(300);
                         this.Close();
@@ -73,8 +71,7 @@ namespace Warehouse.Profile
                         {
                             if (database.Check(AuthManager.CurrentUsername, currentPassword))
                             {
-                                string query = $"UPDATE Account SET username = '{newUsername.ToLower()}', password = '{newPassword}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}' AND password = '{PasswordEncoder.GetSHA256Hash(currentPassword)}'"; 
-                                database.Update(query);
+                                database.UpdateUsernameAndPassword(newUsername, newPassword);
                                 AuthManager.CurrentUsername = newUsername;
                                 MessageBox.Show("Данные успешно обновлены!");
                                 Thread.Sleep(300);
@@ -95,9 +92,6 @@ namespace Warehouse.Profile
 
             
         }
-
-        //string query = $"UPDATE Account SET username = '{newUsername.ToLower()}' WHERE username = '{AuthManager.CurrentUsername.ToLower()}' AND password = '{PasswordEncoder.GetSHA256Hash(currentPassword)}'";
-
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
