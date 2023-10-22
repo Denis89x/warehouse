@@ -82,10 +82,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTO\ComboBoxDTO.cs" />
+    <Compile Include="DTO\ProductTypeDTO.cs" />
     <Compile Include="Profile\PrfSettings.xaml.cs">
       <DependentUpon>PrfSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\ValidationFileds.cs" />
+    <Compile Include="View\AddPage\ProductAdd.xaml.cs">
+      <DependentUpon>ProductAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddPage\ProductType.xaml.cs">
       <DependentUpon>ProductType.xaml</DependentUpon>
     </Compile>
@@ -115,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Profile\PrfSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddPage\ProductAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
+using Warehouse.DTO;
 using Warehouse.Service;
 using Warehouse.Storage;
 
@@ -10,6 +12,7 @@ namespace Warehouse
     {
         static string connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=warehouse;Integrated Security=True;Connect Timeout=30;Encrypt=False";
         SqlConnection sqlConnection = new SqlConnection(connection);
+        private string selectProductType = $"select product_type_id, type_name from product_type";
 
         public void Connection()
         {
@@ -102,7 +105,29 @@ namespace Warehouse
 
         public void ReadProductType(DataGrid grid)
         {
-            Select($"select product_type_id, type_name from product_type", grid);
+            Select(selectProductType, grid);
+        }
+
+        public void ReadProductTypeToComboBox(ComboBox box)
+        {
+            ComboBoxToTable(selectProductType, box);
+        }
+
+        public void ComboBoxToTable(string query, ComboBox box)
+        {
+            Connection();
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            box.Items.Clear();
+            while (reader.Read())
+            {
+                ComboBoxDTO dto = new ComboBoxDTO();
+                dto.name = reader.GetString(1);
+                box.Items.Add(dto);
+            }
+            reader.Close();
+            Connection();
         }
     }
 }

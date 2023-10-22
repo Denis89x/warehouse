@@ -53,3 +53,5 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\Profile\PrfSettings.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\ProductType.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\ProductType.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\ProductAdd.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\ProductAdd.baml

@@ -95,7 +95,7 @@
             </DataGrid>
             <DataGrid   
                 Margin="160,30,30,30" 
-                Visibility="Visible"
+                Visibility="Collapsed"
                 x:Name="ProductTypeGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -116,6 +116,36 @@
                         <MenuItem x:Name="EditProductType" Header="Редактировать"/>
                         <MenuItem x:Name="DeleteProductType"  Header="Удалить"/>
                         <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+            <DataGrid   
+                Margin="160,30,30,30" 
+                Visibility="Visible"
+                x:Name="ProductGrid" 
+                AutoGenerateColumns="false"
+                CanUserResizeColumns="False" 
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                CanUserReorderColumns="False" 
+                SelectionMode="Single" 
+                SelectionUnit="FullRow" 
+                CanUserResizeRows="False" 
+                IsReadOnly="True"
+                Foreground="#FF7643D2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ProductId" Binding="{Binding product_id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding position}"/>
+                    <DataGridTextColumn Header="Тип продукта" Width="*" Binding="{Binding product_type_id}"/>
+                    <DataGridTextColumn Header="Наличие" Width="*" Binding="{Binding presence}"/>
+                    <DataGridTextColumn Header="Стоимость" Width="*" Binding="{Binding cost}"/>
+                    <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding description}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="EditProduct" Header="Редактировать"/>
+                        <MenuItem x:Name="DeleteProduct"  Header="Удалить"/>
+                        <MenuItem x:Name="AddProduct" Header="Добавить" Click="AddProduct_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

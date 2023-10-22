@@ -86,7 +86,7 @@
             VerticalAlignment="Bottom" 
             Content="Авторизоваться"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 0 0 160" 
+            Margin="0 0 0 170" 
             Click="AuthorizationButton_Click">
         </Button>
         <Button 

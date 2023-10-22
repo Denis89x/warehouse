@@ -74,5 +74,11 @@ namespace Warehouse.View.Main
         {
 
         }
+
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            ProductAdd product = new ProductAdd(ProductGrid);
+            product.ShowDialog();
+        }
     }
 }
