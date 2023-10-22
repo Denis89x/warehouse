@@ -95,6 +95,11 @@ namespace Warehouse
             Connection();
         }
 
+        public void CreateProductType(string title)
+        {
+            Update($"insert into product_type (type_name) values (N'{title.ToLower()}')");
+        }
+
         public void ReadProductType(DataGrid grid)
         {
             Select($"select product_type_id, type_name from product_type", grid);

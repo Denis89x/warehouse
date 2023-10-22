@@ -73,7 +73,8 @@
             VerticalAlignment="Center" 
             Content="Добавить"
             RenderOptions.EdgeMode="Aliased"
-            Margin="120 140 0 0">
+            Margin="120 120 0 0"
+            Click="Confirm_Click">
         </Button>
         <Button
             x:Name="Return"
@@ -88,7 +89,7 @@
             VerticalAlignment="Center" 
             Content="Вернуться"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 140 120 0"
+            Margin="0 120 120 0"
             Click="Return_Click">
         </Button>
     </Grid>

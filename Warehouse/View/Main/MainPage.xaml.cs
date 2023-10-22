@@ -1,5 +1,4 @@
-﻿using System.Web.Configuration;
-using System.Windows;
+﻿using System.Windows;
 using Warehouse.Profile;
 using Warehouse.Storage;
 using Warehouse.View.AddPage;
@@ -51,7 +50,7 @@ namespace Warehouse.View.Main
 
         private void AddProductType_Click(object sender, RoutedEventArgs e)
         {
-            ProductType product = new ProductType();
+            ProductType product = new ProductType(ProductTypeGrid);
             product.ShowDialog();
         }
 
