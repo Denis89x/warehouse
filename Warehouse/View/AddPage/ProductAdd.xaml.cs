@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Warehouse.DTO;
+using Warehouse.Service;
 
 namespace Warehouse.View.AddPage
 {
@@ -22,7 +24,18 @@ namespace Warehouse.View.AddPage
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
+            string title = ProductTitleBox.Text;
+            ComboBoxDTO dto = (ComboBoxDTO) ProductTypeComboBox.SelectedItem;
+            string cost = ProductCost.Text;
+            string description = ProductDescription.Text;
 
+            ValidationFileds validation = new ValidationFileds();
+
+            if (validation.ValidationProductAdd(title, cost, description, dto))
+            {
+                database.CreateProduct(title, validation.CastCostToDouble(cost), description, dto);
+                database.ReadProduct(grid);
+            }
         }
     }
 }

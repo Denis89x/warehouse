@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
+using Warehouse.DTO;
 
 namespace Warehouse.Service
 {
@@ -34,6 +36,76 @@ namespace Warehouse.Service
 
             if (!ValidationMiddleName(middleName))
             {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidationProductAdd(string title, string cost, string description, ComboBoxDTO box)
+        {
+            if (!ValidationProductTypeTitle(title))
+                return false;
+
+            if (!ValidationCost(cost))
+                return false;
+
+            if (!ValidationProductDescription(description))
+                return false;
+
+            if (!ValidationComboBoxItem(box))
+                return false;
+
+            return true;
+        }
+
+        public bool ValidationComboBoxItem(ComboBoxDTO combo)
+        {
+            if (combo == null)
+            {
+                MessageBox.Show("Выберите тип продукта!");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidationProductDescription(string description)
+        {
+            string pattern = @"^[a-zA-Zа-яА-Я\s]{3,60}$";
+
+            if (!Regex.IsMatch(description, pattern))
+            {
+                MessageBox.Show("Размер описания от 3 до 60 символов, без цифр и знаков!");
+                return false;
+            }
+
+            return true;
+        }
+
+        public double CastCostToDouble(string cost)
+        {
+            if (double.TryParse(cost, out double result))
+                return result;
+
+            return 0.0;
+        }
+
+        public bool ValidationCost(string cost)
+        {
+            string pattern = @"^\d+$";
+
+            
+            if (double.TryParse(cost, out double costDouble))
+            {
+                if (!Regex.IsMatch(costDouble.ToString(), pattern) || costDouble <= 0 || costDouble > 10000)
+                {
+                    MessageBox.Show("Число должно быть больше 0 и не больше 10000");
+                    return false;
+                }
+            } else
+            {
+                MessageBox.Show("Введите число!");
                 return false;
             }
 

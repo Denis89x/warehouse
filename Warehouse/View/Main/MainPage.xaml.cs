@@ -62,6 +62,10 @@ namespace Warehouse.View.Main
 
         private void ProductType_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ProductGrid.Visibility = Visibility.Collapsed;
+
+            ProductTypeGrid.Visibility = Visibility.Visible;
+
             database.ReadProductType(ProductTypeGrid);
         }
 
@@ -72,7 +76,11 @@ namespace Warehouse.View.Main
 
         private void Product_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ProductTypeGrid.Visibility = Visibility.Collapsed;
 
+            ProductGrid.Visibility = Visibility.Visible;
+
+            database.ReadProduct(ProductGrid);
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)

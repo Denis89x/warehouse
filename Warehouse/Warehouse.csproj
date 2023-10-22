@@ -83,7 +83,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DTO\ComboBoxDTO.cs" />
-    <Compile Include="DTO\ProductTypeDTO.cs" />
     <Compile Include="Profile\PrfSettings.xaml.cs">
       <DependentUpon>PrfSettings.xaml</DependentUpon>
     </Compile>

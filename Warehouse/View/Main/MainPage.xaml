@@ -135,8 +135,8 @@
                 Foreground="#FF7643D2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ProductId" Binding="{Binding product_id}" Visibility="Hidden"/>
-                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding position}"/>
-                    <DataGridTextColumn Header="Тип продукта" Width="*" Binding="{Binding product_type_id}"/>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding title}"/>
+                    <DataGridTextColumn Header="Тип продукта" Width="*" Binding="{Binding type_name}"/>
                     <DataGridTextColumn Header="Наличие" Width="*" Binding="{Binding presence}"/>
                     <DataGridTextColumn Header="Стоимость" Width="*" Binding="{Binding cost}"/>
                     <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding description}"/>
