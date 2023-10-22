@@ -94,5 +94,10 @@ namespace Warehouse
             command.ExecuteNonQuery();
             Connection();
         }
+
+        public void ReadProductType(DataGrid grid)
+        {
+            Select($"select product_type_id, type_name from product_type", grid);
+        }
     }
 }

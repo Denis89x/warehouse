@@ -113,15 +113,9 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditProductType" Header="Редактировать">
-
-                        </MenuItem>
-                        <MenuItem x:Name="DeleteProductType"  Header="Удалить">
-
-                        </MenuItem>
-                        <MenuItem x:Name="AddProductType" Header="Добавить">
-
-                        </MenuItem>
+                        <MenuItem x:Name="EditProductType" Header="Редактировать"/>
+                        <MenuItem x:Name="DeleteProductType"  Header="Удалить"/>
+                        <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -155,16 +149,16 @@
                             <TextBlock Text="Продукты" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="ProductType" Height="60" PreviewMouseLeftButtonDown="ProductType_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageVariant" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
                             <TextBlock Text="Тип продукта" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60" PreviewMouseLeftButtonDown="ListViewItem_PreviewMouseLeftButtonDown">
+                    <ListViewItem x:Name="Settings" Height="60" PreviewMouseLeftButtonDown="Settings_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CogOutline" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Тип продукта" VerticalAlignment="Center" Margin="0 10"/>
+                            <TextBlock Text="Настройки" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="AdminRegistration" Height="60" PreviewMouseLeftButtonDown="AdminRegistration_MouseLeftButtonDown">

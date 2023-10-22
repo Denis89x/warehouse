@@ -86,6 +86,9 @@
       <DependentUpon>PrfSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\ValidationFileds.cs" />
+    <Compile Include="View\AddPage\ProductType.xaml.cs">
+      <DependentUpon>ProductType.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Profile\PrfSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddPage\ProductType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

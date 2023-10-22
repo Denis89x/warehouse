@@ -2,15 +2,17 @@
 using System.Windows;
 using Warehouse.Profile;
 using Warehouse.Storage;
+using Warehouse.View.AddPage;
 
 namespace Warehouse.View.Main
 {
     public partial class MainPage : Window
     {
+        Database database = new Database();
+
         public MainPage()
         {
             InitializeComponent();
-            Database database = new Database();
             if (AuthManager.CurrentUsername != null)
             {
                 bool isAdmin = database.CheckAdmin(AuthManager.CurrentUsername);
@@ -47,10 +49,21 @@ namespace Warehouse.View.Main
             Application.Current.Shutdown();
         }
 
-        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void AddProductType_Click(object sender, RoutedEventArgs e)
+        {
+            ProductType product = new ProductType();
+            product.ShowDialog();
+        }
+
+        private void Settings_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             PrfSettings settings = new PrfSettings();
             settings.ShowDialog();
+        }
+
+        private void ProductType_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            database.ReadProductType(ProductTypeGrid);
         }
     }
 }
