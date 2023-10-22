@@ -53,7 +53,6 @@ namespace Warehouse.Service
             return true;
         }
 
-
         public bool ValidationTwoPasswords(string firstPassword, string secondPassword)
         {
             if (!firstPassword.Equals(secondPassword))

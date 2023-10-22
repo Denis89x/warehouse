@@ -64,5 +64,15 @@ namespace Warehouse.View.Main
         {
             database.ReadProductType(ProductTypeGrid);
         }
+
+        private void OrderStructure_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Product_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -137,13 +137,19 @@
                             <TextBlock Text="Заказ" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem x:Name="OrderStructure" Height="60" PreviewMouseLeftButtonDown="OrderStructure_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListGroupPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Состав заказа" VerticalAlignment="Center" Margin="0 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
                             <TextBlock Text="Поставщики" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem Height="60" x:Name="Product" PreviewMouseLeftButtonDown="Product_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PackageVariantPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
                             <TextBlock Text="Продукты" VerticalAlignment="Center" Margin="0 10"/>
