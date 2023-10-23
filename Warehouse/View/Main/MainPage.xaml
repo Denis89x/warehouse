@@ -186,7 +186,7 @@
                     </Button>
                 </Grid>
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF003B75">
-                    <ListViewItem Height="60">
+                    <ListViewItem x:Name="Order" Height="60" PreviewMouseLeftButtonDown="Order_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="NewspaperPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
                             <TextBlock Text="Заказ" VerticalAlignment="Center" Margin="0 10"/>

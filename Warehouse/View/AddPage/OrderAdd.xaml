@@ -1,0 +1,212 @@
+﻿<Window x:Class="Warehouse.View.AddPage.OrderAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.View.AddPage"
+        mc:Ignorable="d"
+        Height="600" Width="650"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="#FF22A4E8"
+        ResizeMode="CanMinimize"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <materialDesign:PackIcon 
+            Height="55px"
+            Width="55px"
+            HorizontalAlignment="Center"
+            Margin="0 35 0 0"
+            Kind="Plus"
+            Foreground="White"/>
+        <Border 
+            Background="White"
+            CornerRadius="10" 
+            BorderBrush="Black"
+            Height="360px" 
+            Width="300px" 
+            Padding="10">
+            <Border.Effect>
+                <DropShadowEffect 
+                    ShadowDepth="0" 
+                    Color="Black" 
+                    Opacity="0.3" 
+                    BlurRadius="15" 
+                    Direction="360" 
+                    RenderingBias="Quality"/>
+            </Border.Effect>
+        </Border>
+        <Label 
+            FontSize="18px"
+            Height="30px"
+            Content="Добавить"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0 0 0 280">
+        </Label>
+        <ComboBox
+            x:Name="SupplierComboBox"
+            Width="225px"
+            Visibility="Collapsed"
+            Height="40px"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Margin="0 0 0 160"
+            materialDesign:HintAssist.Hint="Поставщик"
+            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+            BorderBrush="#BC989393">
+        </ComboBox>
+        <ComboBox
+            x:Name="OrderTypeComboBox"
+            Width="225px"
+            Height="40px"
+                        Visibility="Collapsed"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Margin="0 0 0 60"
+            materialDesign:HintAssist.Hint="Тип заказа"
+            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+            BorderBrush="#BC989393">
+            <ComboBoxItem Content="Поступление"/>
+            <ComboBoxItem Content="Выбытие"/>
+        </ComboBox>
+        <TextBox
+            x:Name="ProductCost"
+            materialDesign:HintAssist.Hint="Сумма"
+            FontSize="15px"
+                        Visibility="Collapsed"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 40 0 0" 
+            IsReadOnly="True"
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="Date"
+            materialDesign:HintAssist.Hint="Дата заказа"
+            FontSize="15px"
+            Padding="12 10 2 2"
+                        Visibility="Collapsed"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 140 0 0" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <Button
+            x:Name="NextToAdd"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Дальше"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 290 0 0"
+            Click="NextToAdd_Click">
+        </Button>
+        <Button
+            x:Name="ReturnToMain"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вернуться"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 290 120 0"
+            Click="ReturnToMain_Click">
+        </Button>
+        <Button
+            x:Name="ReturnToFirstPage"
+            Width="105px"
+            Height="45px"
+            Visibility="Collapsed"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вернуться"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 290 120 0"
+            Click="ReturnToFirstPage_Click">
+        </Button>
+        <Button
+            x:Name="NextToSecondPage"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Дальше"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 290 0 0"
+            Click="NextToSecondPage_Click">
+        </Button>
+        <Button
+            x:Name="CompleteButton"
+            Width="105px"
+            Height="45px"
+            Visibility="Collapsed"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Добавить"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 290 0 0"
+            Click="CompleteButton_Click">
+        </Button>
+        <DataGrid   
+            Visibility="Visible"
+            Margin="175,180,175,180" 
+                x:Name="SupplierGrid" 
+                Background="White"
+                AutoGenerateColumns="false"
+                CanUserResizeColumns="False" 
+                CanUserAddRows="False" 
+                CanUserDeleteRows="True" 
+                CanUserReorderColumns="False" 
+                SelectionMode="Single" 
+                SelectionUnit="FullRow" 
+                CanUserResizeRows="False" 
+                IsReadOnly="True"
+                Foreground="#FF7643D2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="SupplierId" Binding="{Binding supplier_id}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding title}"/>
+                <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding address}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</Window>

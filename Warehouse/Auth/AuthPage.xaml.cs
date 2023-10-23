@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Warehouse.Service;
 using Warehouse.Storage;
+using Warehouse.View.AddPage;
 using Warehouse.View.Main;
 
 namespace Warehouse.Auth
@@ -40,6 +41,13 @@ namespace Warehouse.Auth
             this.Hide();
             MainWindow main = new MainWindow();
             main.Show();
+        }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            OrderAdd order = new OrderAdd();
+            order.Show();
+            this.Hide();
         }
     }
 }

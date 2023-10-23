@@ -106,5 +106,10 @@ namespace Warehouse.View.Main
 
             database.ReadSupplier(SupplierGrid);
         }
+
+        private void Order_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

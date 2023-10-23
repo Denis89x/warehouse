@@ -12,6 +12,7 @@ namespace Warehouse
         static string connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=warehouse;Integrated Security=True;Connect Timeout=30;Encrypt=False";
         SqlConnection sqlConnection = new SqlConnection(connection);
         private string selectProductType = $"select product_type_id, type_name from product_type";
+        private string selectProductAll = $"select product_id, title from product";
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
         private string selectSupplier = $"select * from supplier";
 
@@ -122,6 +123,11 @@ namespace Warehouse
         public void ReadProductTypeToComboBox(ComboBox box)
         {
             ComboBoxToTable(selectProductType, box);
+        }
+
+        public void ReadProductToComboBox(ComboBox box)
+        {
+            ComboBoxToTable(selectProductAll, box);
         }
 
         public void ReadProduct(DataGrid grid)
