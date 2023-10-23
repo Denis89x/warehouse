@@ -63,6 +63,7 @@ namespace Warehouse.View.Main
         private void ProductType_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProductGrid.Visibility = Visibility.Collapsed;
+            SupplierGrid.Visibility = Visibility.Collapsed;
 
             ProductTypeGrid.Visibility = Visibility.Visible;
 
@@ -77,6 +78,7 @@ namespace Warehouse.View.Main
         private void Product_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ProductTypeGrid.Visibility = Visibility.Collapsed;
+            SupplierGrid.Visibility = Visibility.Collapsed;
 
             ProductGrid.Visibility = Visibility.Visible;
 
@@ -87,6 +89,22 @@ namespace Warehouse.View.Main
         {
             ProductAdd product = new ProductAdd(ProductGrid);
             product.ShowDialog();
+        }
+
+        private void AddSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            SupplierAdd supplierAdd = new SupplierAdd(SupplierGrid);
+            supplierAdd.ShowDialog();
+        }
+
+        private void Supplier_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ProductGrid.Visibility = Visibility.Collapsed;
+            ProductTypeGrid.Visibility = Visibility.Collapsed;
+
+            SupplierGrid.Visibility = Visibility.Visible;
+
+            database.ReadSupplier(SupplierGrid);
         }
     }
 }

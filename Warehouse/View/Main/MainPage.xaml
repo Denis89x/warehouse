@@ -81,15 +81,9 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditClient" Header="Редактировать">
-
-                        </MenuItem>
-                        <MenuItem x:Name="DeleteClient"  Header="Удалить">
-
-                        </MenuItem>
-                        <MenuItem x:Name="Add" Header="Добавить">
-                            
-                        </MenuItem>
+                        <MenuItem x:Name="EditClient" Header="Редактировать"/>
+                        <MenuItem x:Name="DeleteClient"  Header="Удалить"/>
+                        <MenuItem x:Name="Add" Header="Добавить"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -121,7 +115,7 @@
             </DataGrid>
             <DataGrid   
                 Margin="160,30,30,30" 
-                Visibility="Visible"
+                Visibility="Collapsed"
                 x:Name="ProductGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -149,6 +143,37 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
+            <DataGrid   
+                Margin="160,30,30,30" 
+                Visibility="Visible"
+                x:Name="SupplierGrid" 
+                AutoGenerateColumns="false"
+                CanUserResizeColumns="False" 
+                CanUserAddRows="False" 
+                CanUserDeleteRows="False" 
+                CanUserReorderColumns="False" 
+                SelectionMode="Single" 
+                SelectionUnit="FullRow" 
+                CanUserResizeRows="False" 
+                IsReadOnly="True"
+                Foreground="#FF7643D2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="SupplierId" Binding="{Binding supplier_id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Название" Width="*" Binding="{Binding title}"/>
+                    <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding address}"/>
+                    <DataGridTextColumn Header="Номер телефона" Width="*" Binding="{Binding phone_number}"/>
+                    <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding surname}"/>
+                    <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding first_name}"/>
+                    <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding middle_name}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="EditSupplier" Header="Редактировать"/>
+                        <MenuItem x:Name="DeleteSupplier" Header="Удалить"/>
+                        <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#19000000">
             <StackPanel>
@@ -173,7 +198,7 @@
                             <TextBlock Text="Состав заказа" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="60">
+                    <ListViewItem Height="60" x:Name="Supplier" PreviewMouseLeftButtonDown="Supplier_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
                             <TextBlock Text="Поставщики" VerticalAlignment="Center" Margin="0 10"/>

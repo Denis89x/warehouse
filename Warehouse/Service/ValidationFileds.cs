@@ -1,6 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using Warehouse.DTO;
 
 namespace Warehouse.Service
@@ -42,6 +43,48 @@ namespace Warehouse.Service
             return true;
         }
 
+        public bool ValidationSupplierAdd(string title, string address, string phoneNumber, string surname, string firstName, string middleName)
+        {
+            if (!ValidationProductTypeTitle(title))
+                return false;
+
+            if (!ValidationAddress(address))
+                return false;
+
+            if (!ValidationPhoneNumber(phoneNumber))
+                return false;
+
+            if (!ValidationSurname(surname))
+            {
+                return false;
+            }
+
+            if (!ValidationFirstName(firstName))
+            {
+                return false;
+            }
+
+            if (!ValidationMiddleName(middleName))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidationPhoneNumber(string phoneNumber)
+        {
+            string pattern = @"^\+\d{12}$";
+
+            if (!Regex.IsMatch(phoneNumber, pattern))
+            {
+                MessageBox.Show("Введите корректный номер телефона! Пример: +375441234567");
+                return false;
+            }
+
+            return true;
+        }
+
         public bool ValidationProductAdd(string title, string cost, string description, ComboBoxDTO box)
         {
             if (!ValidationProductTypeTitle(title))
@@ -55,6 +98,19 @@ namespace Warehouse.Service
 
             if (!ValidationComboBoxItem(box))
                 return false;
+
+            return true;
+        }
+
+        public bool ValidationAddress(string address)
+        {
+            string pattern = @"^[a-zA-Zа-яА-Я\s]{3,40}$";
+
+            if (!Regex.IsMatch(address, pattern))
+            {
+                MessageBox.Show("Размер описания от 3 до 40 символов, без цифр и знаков!");
+                return false;
+            }
 
             return true;
         }

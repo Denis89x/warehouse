@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Производственная практика\Warehouse\Warehouse\App.xaml
-6-1733306791
+71582126165
 
-16444319419
+17-282822197
 24-67231907
-Auth\AuthPage.xaml;Auth\MainWindow.xaml;Profile\PrfSettings.xaml;View\AddPage\ProductAdd.xaml;View\AddPage\ProductType.xaml;View\Main\MainPage.xaml;
+Auth\AuthPage.xaml;Auth\MainWindow.xaml;Profile\PrfSettings.xaml;View\AddPage\ProductAdd.xaml;View\AddPage\ProductType.xaml;View\AddPage\SupplierAdd.xaml;View\Main\MainPage.xaml;
 
-False
+True
 

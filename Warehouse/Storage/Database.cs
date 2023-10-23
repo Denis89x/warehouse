@@ -13,6 +13,7 @@ namespace Warehouse
         SqlConnection sqlConnection = new SqlConnection(connection);
         private string selectProductType = $"select product_type_id, type_name from product_type";
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
+        private string selectSupplier = $"select * from supplier";
 
         public void Connection()    
         {
@@ -108,6 +109,11 @@ namespace Warehouse
             Update($"insert into product (product_type_id, presence, cost, description, title) values ('{dto.id}', '{0}', '{cost}', N'{description}', N'{title}')");
         }
 
+        public void CreateSupplier(string title, string address, string phoneNumber, string surname, string firstName, string middleName)
+        {
+            Update($"insert into supplier (title, address, phone_number, surname, first_name, middle_name) values (N'{title}', N'{address}', '{phoneNumber}', N'{surname}', N'{firstName}', N'{middleName}')");
+        }
+
         public void ReadProductType(DataGrid grid)
         {
             Select(selectProductType, grid);
@@ -121,6 +127,11 @@ namespace Warehouse
         public void ReadProduct(DataGrid grid)
         {
             Select(selectProduct, grid);
+        }
+
+        public void ReadSupplier(DataGrid grid)
+        {
+            Select(selectSupplier, grid);
         }
 
         public void ComboBoxToTable(string query, ComboBox box)
