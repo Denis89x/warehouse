@@ -47,6 +47,7 @@ namespace Warehouse.View.AddPage
 
                     AddAmount();
 
+
                     this.Close();
                 } else
                 {
@@ -57,13 +58,14 @@ namespace Warehouse.View.AddPage
 
         private void addToComboBoxOrder(Dictionary<string, int> dictionary)
         {
+            List<ComboBoxOrder> combo = new List<ComboBoxOrder>();
 
             foreach (var item in dictionary)
             {
-                Database.combo.Add(new ComboBoxOrder { Title = item.Key, Quantity = item.Value });
+                combo.Add(new ComboBoxOrder { Title = item.Key, Quantity = item.Value });
             }
 
-            grid.ItemsSource = Database.combo;
+            grid.ItemsSource = combo;
         }
 
         private void AddAmount()

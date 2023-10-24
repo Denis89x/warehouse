@@ -11,8 +11,8 @@ namespace Warehouse.View.AddPage
 
         public OrderAdd()
         {
-            database.ReadSupplierToComboBox(SupplierComboBox);
             InitializeComponent();
+            database.ReadSupplierToComboBox(SupplierComboBox);
         }
 
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
@@ -69,7 +69,7 @@ namespace Warehouse.View.AddPage
             ComboBoxDTO supplier = (ComboBoxDTO)SupplierComboBox.SelectedItem;
 
             database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), OrderTypeComboBox.SelectedItem.ToString());
-
+            this.Close();
         }
     }
 }

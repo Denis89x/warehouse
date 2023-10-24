@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
 using Warehouse.Service;
@@ -19,8 +20,6 @@ namespace Warehouse
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
         private string selectSupplier = $"select * from supplier";
         private string selectSupplierAll = $"select supplier_id, title from supplier";
-
-        public static List<ComboBoxOrder> combo = new List<ComboBoxOrder>();
 
         public void Connection()    
         {
@@ -136,13 +135,13 @@ namespace Warehouse
 
         public long GetAccountId()
         {
-            Connection();
-
-            SqlCommand command = new SqlCommand($"Select account_id from account where username = {AuthManager.CurrentUsername}", sqlConnection);
+/*            Connection();
+*/
+            SqlCommand command = new SqlCommand($"Select account_id from account where username = '{AuthManager.CurrentUsername}'", sqlConnection);
 
             long id = Convert.ToInt64(command.ExecuteScalar());
 
-            Connection();
+/*            Connection();*/
 
             return id;
         }
@@ -164,10 +163,12 @@ namespace Warehouse
         {
             Connection();
 
-            if (sqlConnection.State == ConnectionState.Closed)
-                Connection();
-            SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{DateTime.Today}', N'{orderType}')", sqlConnection);
-            long orderId = (long) command.ExecuteScalar();
+            string orderDate = DateTime.Today.ToString("yyyy-MM-dd");
+
+            SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) output inserted.order_id values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{orderDate}', N'{orderType}')", sqlConnection);
+            long orderId = (long)command.ExecuteScalar();
+
+
 
             foreach (DictionaryEntry item in ComboBoxOrder.dicrtionaryWithId1)
             {
@@ -192,9 +193,9 @@ namespace Warehouse
             ComboBoxToTable(selectProductAll, box);
         }
 
-        public void ReadSupplierToComboBox(ComboBox box)
+        public void ReadSupplierToComboBox(ComboBox boxi)
         {
-            ComboBoxToTable(selectSupplierAll, box);
+            ComboBoxToTable(selectSupplierAll, boxi);
         }
 
         public void ReadProduct(DataGrid grid)

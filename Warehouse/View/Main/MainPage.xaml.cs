@@ -116,7 +116,6 @@ namespace Warehouse.View.Main
         {
             OrderAdd order = new OrderAdd();
             order.Show();
-            this.Hide();
         }
     }
 }
