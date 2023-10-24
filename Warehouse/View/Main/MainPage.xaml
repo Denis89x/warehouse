@@ -59,8 +59,8 @@
             VerticalAlignment="Stretch">
             <DataGrid   
                 Margin="160,30,30,30" 
-                Visibility="Collapsed"
-                x:Name="ClientGrid" 
+                Visibility="Visible"
+                x:Name="OrderGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
                 CanUserAddRows="False" 
@@ -72,18 +72,31 @@
                 IsReadOnly="True"
                 Foreground="#FF7643D2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding id_employee}" Visibility="Hidden"/>
-                    <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding last_name}"/>
-                    <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding name}"/>
-                    <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding middle_name}"/>
-                    <DataGridTextColumn Header="Должность" Width="*" Binding="{Binding position}"/>
-                    <DataGridTextColumn Header="Возраст" Width="*" Binding="{Binding age}"/>
+                    <DataGridTextColumn Header="Номер заказа" Width="*" Binding="{Binding order_id}"/>
+                    <DataGridTextColumn Header="Поставщик" Width="*"  Binding="{Binding title}"/>
+                    <DataGridTextColumn Header="Сотрудник" Width="*"  Binding="{Binding surname}"/>
+                    <DataGridTextColumn Header="Сумма" Width="*"  Binding="{Binding amount}"/>
+                    <DataGridTextColumn Header="Дата" Width="*"  Binding="{Binding order_date}"/>
+                    <DataGridTextColumn Header="Тип" Width="*"  Binding="{Binding order_type}"/>
+                    <DataGridTemplateColumn Header="Товары" Width="*" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding product}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding title}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="EditClient" Header="Редактировать"/>
                         <MenuItem x:Name="DeleteClient"  Header="Удалить"/>
-                        <MenuItem x:Name="Add" Header="Добавить"/>
+                        <MenuItem x:Name="Add" Header="Добавить" Click="OrderButtontetet_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -145,7 +158,7 @@
             </DataGrid>
             <DataGrid   
                 Margin="160,30,30,30" 
-                Visibility="Visible"
+                Visibility="Collapsed"
                 x:Name="SupplierGrid" 
                 AutoGenerateColumns="false"
                 CanUserResizeColumns="False" 
@@ -192,12 +205,6 @@
                             <TextBlock Text="Заказ" VerticalAlignment="Center" Margin="0 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="OrderStructure" Height="60" PreviewMouseLeftButtonDown="OrderStructure_PreviewMouseLeftButtonDown">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FormatListGroupPlus" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="Состав заказа" VerticalAlignment="Center" Margin="0 10"/>
-                        </StackPanel>
-                    </ListViewItem>
                     <ListViewItem Height="60" x:Name="Supplier" PreviewMouseLeftButtonDown="Supplier_PreviewMouseLeftButtonDown">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookAccount" Height="25" Width="25" Margin="10" VerticalAlignment="Center"/>
@@ -230,13 +237,6 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
-            <Button 
-            x:Name="OrderButtontetet"
-            Width="50px"
-            Click="OrderButtontetet_Click"
-            Visibility="Visible"
-                VerticalAlignment="Bottom">
-            </Button>
         </Grid>
     </Grid>
 </Window>

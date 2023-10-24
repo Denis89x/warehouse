@@ -96,12 +96,5 @@
             Click="Registr_Click"
             Visibility="Collapsed">
         </Button>
-        <Button 
-            x:Name="Order"
-            Width="50px"
-            HorizontalAlignment="Right" 
-            Click="Order_Click"
-            Visibility="Visible">
-        </Button>
     </Grid>
 </Window>

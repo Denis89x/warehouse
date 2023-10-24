@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
+using System.Windows.Controls;
 using Warehouse.DTO;
 using Warehouse.Service;
 
@@ -8,11 +10,13 @@ namespace Warehouse.View.AddPage
     {
         Database database = new Database();
         ValidationFileds validation = new ValidationFileds();
+        DataGrid grid = new DataGrid();
 
-        public OrderAdd()
+        public OrderAdd(DataGrid grid)
         {
             InitializeComponent();
             database.ReadSupplierToComboBox(SupplierComboBox);
+            this.grid = grid;
         }
 
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
@@ -68,7 +72,9 @@ namespace Warehouse.View.AddPage
         {
             ComboBoxDTO supplier = (ComboBoxDTO)SupplierComboBox.SelectedItem;
 
-            database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), OrderTypeComboBox.SelectedItem.ToString());
+            database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), ((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString());
+            DataTable orderTable = database.GetOrdersWithProducts();
+            grid.ItemsSource = orderTable.DefaultView;
             this.Close();
         }
     }

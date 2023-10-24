@@ -8,7 +8,7 @@ namespace Warehouse.Storage
         public string Title { get; set; }
         public int Quantity { get; set; }
 
-        public static OrderedDictionary dicrtionaryWithId1 = new OrderedDictionary();
-        public static Dictionary<string, int> dicrtionaryWithName = new Dictionary<string, int>();
+        public static OrderedDictionary dicrtionaryWithId1 = new OrderedDictionary(); 
+        public static Dictionary<string, int> dicrtionaryWithName = new Dictionary<string, int>(); 
     }
 }

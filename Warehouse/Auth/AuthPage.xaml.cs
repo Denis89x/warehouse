@@ -42,12 +42,5 @@ namespace Warehouse.Auth
             MainWindow main = new MainWindow();
             main.Show();
         }
-
-        private void Order_Click(object sender, RoutedEventArgs e)
-        {
-            OrderAdd order = new OrderAdd();
-            order.Show();
-            this.Hide();
-        }
     }
 }

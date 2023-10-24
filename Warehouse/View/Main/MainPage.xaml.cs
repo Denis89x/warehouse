@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
 using Warehouse.Profile;
 using Warehouse.Storage;
 using Warehouse.View.AddPage;
@@ -23,6 +24,8 @@ namespace Warehouse.View.Main
                     AdminRegistration.Visibility = Visibility.Visible;
                 }
             }
+            DataTable orderTable = database.GetOrdersWithProducts();
+            OrderGrid.ItemsSource = orderTable.DefaultView;
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -62,23 +65,21 @@ namespace Warehouse.View.Main
 
         private void ProductType_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ProductGrid.Visibility = Visibility.Collapsed;
             SupplierGrid.Visibility = Visibility.Collapsed;
+            ProductGrid.Visibility = Visibility.Collapsed;
+            OrderGrid.Visibility = Visibility.Collapsed;
 
             ProductTypeGrid.Visibility = Visibility.Visible;
 
             database.ReadProductType(ProductTypeGrid);
         }
 
-        private void OrderStructure_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
         private void Product_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+
             ProductTypeGrid.Visibility = Visibility.Collapsed;
             SupplierGrid.Visibility = Visibility.Collapsed;
+            OrderGrid.Visibility = Visibility.Collapsed;
 
             ProductGrid.Visibility = Visibility.Visible;
 
@@ -101,6 +102,7 @@ namespace Warehouse.View.Main
         {
             ProductGrid.Visibility = Visibility.Collapsed;
             ProductTypeGrid.Visibility = Visibility.Collapsed;
+            OrderGrid.Visibility = Visibility.Collapsed;
 
             SupplierGrid.Visibility = Visibility.Visible;
 
@@ -109,13 +111,22 @@ namespace Warehouse.View.Main
 
         private void Order_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ProductTypeGrid.Visibility = Visibility.Collapsed;
+            SupplierGrid.Visibility = Visibility.Collapsed;
+            ProductGrid.Visibility = Visibility.Collapsed;
 
+            OrderGrid.Visibility = Visibility.Visible;
+
+            DataTable orderTable = database.GetOrdersWithProducts();
+            OrderGrid.ItemsSource = orderTable.DefaultView;
         }
 
         private void OrderButtontetet_Click(object sender, RoutedEventArgs e)
         {
-            OrderAdd order = new OrderAdd();
+            OrderAdd order = new OrderAdd(OrderGrid);
             order.Show();
+            ComboBoxOrder.dicrtionaryWithId1.Clear();
+            ComboBoxOrder.dicrtionaryWithName.Clear();
         }
     }
 }

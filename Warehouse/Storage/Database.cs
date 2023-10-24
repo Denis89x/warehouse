@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
 using Warehouse.Service;
@@ -20,6 +18,7 @@ namespace Warehouse
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
         private string selectSupplier = $"select * from supplier";
         private string selectSupplierAll = $"select supplier_id, title from supplier";
+        
 
         public void Connection()    
         {
@@ -31,6 +30,17 @@ namespace Warehouse
             {
                 sqlConnection.Open();
             }
+        }
+
+        public DataTable Select(string query)
+        {
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            return data;
         }
 
         public void Select(string query, DataGrid dataGrid)
@@ -135,13 +145,9 @@ namespace Warehouse
 
         public long GetAccountId()
         {
-/*            Connection();
-*/
             SqlCommand command = new SqlCommand($"Select account_id from account where username = '{AuthManager.CurrentUsername}'", sqlConnection);
 
             long id = Convert.ToInt64(command.ExecuteScalar());
-
-/*            Connection();*/
 
             return id;
         }
@@ -167,8 +173,6 @@ namespace Warehouse
 
             SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) output inserted.order_id values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{orderDate}', N'{orderType}')", sqlConnection);
             long orderId = (long)command.ExecuteScalar();
-
-
 
             foreach (DictionaryEntry item in ComboBoxOrder.dicrtionaryWithId1)
             {
@@ -201,6 +205,42 @@ namespace Warehouse
         public void ReadProduct(DataGrid grid)
         {
             Select(selectProduct, grid);
+        }
+
+        /*        public void ReadOrder(long id)
+                {
+                    string query = $"SELECT product.title FROM product JOIN order_composition ON product.product_id = order_composition.product_id WHERE order_composition.order_id = {id}";
+
+                    Select(query, grid);
+                }
+
+                public void ReadOrder(DataGrid grid)
+                {
+                    string selectOrderWithoutProducts = $"select DISTINCT ord.order_id, supplier.title, account.surname, ord.amount, ord.order_date, ord.order_type from ord, supplier, account, order_composition where ord.supplier_id = supplier.supplier_id AND ord.account_id = account.account_id";
+
+                    Select(selectOrderWithoutProducts, grid);
+                }*/
+
+        public DataTable GetOrdersWithProducts()
+        {
+            Connection();
+
+            string selectOrderWithoutProducts = "SELECT DISTINCT ord.order_id, supplier.title, account.surname, ord.amount, ord.order_date, ord.order_type FROM ord, supplier, account, order_composition WHERE ord.supplier_id = supplier.supplier_id AND ord.account_id = account.account_id";
+
+            DataTable orderTable = Select(selectOrderWithoutProducts);
+            orderTable.Columns.Add("product", typeof(DataTable));
+
+            foreach (DataRow row in orderTable.Rows)
+            {
+                long orderId = (long)row["order_id"];
+                string query = $"SELECT product.title FROM product JOIN order_composition ON product.product_id = order_composition.product_id WHERE order_composition.order_id = {orderId}";
+
+                DataTable productTable = Select(query);
+                row["product"] = productTable;
+            }
+            Connection();
+
+            return orderTable;
         }
 
 
