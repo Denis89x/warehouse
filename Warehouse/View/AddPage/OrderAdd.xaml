@@ -52,7 +52,6 @@
         <ComboBox
             x:Name="SupplierComboBox"
             Width="225px"
-            Visibility="Collapsed"
             Height="40px"
             FontSize="15px"
             Padding="12 0 12 0"
@@ -65,7 +64,6 @@
             x:Name="OrderTypeComboBox"
             Width="225px"
             Height="40px"
-                        Visibility="Collapsed"
             FontSize="15px"
             Padding="12 0 12 0"
             Margin="0 0 0 60"
@@ -79,7 +77,6 @@
             x:Name="ProductCost"
             materialDesign:HintAssist.Hint="Сумма"
             FontSize="15px"
-                        Visibility="Collapsed"
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
@@ -93,7 +90,6 @@
             materialDesign:HintAssist.Hint="Дата заказа"
             FontSize="15px"
             Padding="12 10 2 2"
-                        Visibility="Collapsed"
             Height="40px"
             Width="225px"
             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
@@ -183,7 +179,7 @@
             Click="CompleteButton_Click">
         </Button>
         <DataGrid   
-            Visibility="Visible"
+            Visibility="Collapsed"
             Margin="175,180,175,180" 
                 x:Name="SupplierGrid" 
                 Background="White"
@@ -198,9 +194,8 @@
                 IsReadOnly="True"
                 Foreground="#FF7643D2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="SupplierId" Binding="{Binding supplier_id}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding title}"/>
-                <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding address}"/>
+                <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Quantity}"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

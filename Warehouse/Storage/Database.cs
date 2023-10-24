@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Controls;
 using Warehouse.DTO;
@@ -15,6 +18,9 @@ namespace Warehouse
         private string selectProductAll = $"select product_id, title from product";
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
         private string selectSupplier = $"select * from supplier";
+        private string selectSupplierAll = $"select supplier_id, title from supplier";
+
+        public static List<ComboBoxOrder> combo = new List<ComboBoxOrder>();
 
         public void Connection()    
         {
@@ -36,6 +42,19 @@ namespace Warehouse
             adapter.Fill(dataTable);
             dataGrid.ItemsSource = dataTable.DefaultView;
             Connection();
+        }
+
+        public int ReadProductCostById(long id)
+        {
+            Connection();
+
+            SqlCommand command = new SqlCommand($"Select cost from product where product_id = {id}", sqlConnection);
+            
+            int cost = Convert.ToInt32(command.ExecuteScalar());
+
+            Connection();
+
+            return cost;
         }
 
         public int CountUsersWithLogin(string username)
@@ -115,6 +134,49 @@ namespace Warehouse
             Update($"insert into supplier (title, address, phone_number, surname, first_name, middle_name) values (N'{title}', N'{address}', '{phoneNumber}', N'{surname}', N'{firstName}', N'{middleName}')");
         }
 
+        public long GetAccountId()
+        {
+            Connection();
+
+            SqlCommand command = new SqlCommand($"Select account_id from account where username = {AuthManager.CurrentUsername}", sqlConnection);
+
+            long id = Convert.ToInt64(command.ExecuteScalar());
+
+            Connection();
+
+            return id;
+        }
+
+        public long GetOrderId()
+        {
+            Connection();
+
+            SqlCommand command = new SqlCommand($"Select order_id from ord where username = {AuthManager.CurrentUsername}", sqlConnection);
+
+            long id = Convert.ToInt64(command.ExecuteScalar());
+
+            Connection();
+
+            return id;
+        }
+
+        public void CreateOrder(ComboBoxDTO supplierDTO, double amount, string orderType)
+        {
+            Connection();
+
+            if (sqlConnection.State == ConnectionState.Closed)
+                Connection();
+            SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{DateTime.Today}', N'{orderType}')", sqlConnection);
+            long orderId = (long) command.ExecuteScalar();
+
+            foreach (DictionaryEntry item in ComboBoxOrder.dicrtionaryWithId1)
+            {
+                Update($"insert into order_composition (product_id, order_id, quantity) values ('{(long)item.Key}', '{orderId}', '{(int)item.Value}')");
+            }
+
+            Connection();
+        }
+
         public void ReadProductType(DataGrid grid)
         {
             Select(selectProductType, grid);
@@ -130,9 +192,20 @@ namespace Warehouse
             ComboBoxToTable(selectProductAll, box);
         }
 
+        public void ReadSupplierToComboBox(ComboBox box)
+        {
+            ComboBoxToTable(selectSupplierAll, box);
+        }
+
         public void ReadProduct(DataGrid grid)
         {
             Select(selectProduct, grid);
+        }
+
+
+        public void ReadAddFromComboBoxOrder(DataGrid grid)
+        {
+            Select(selectProductAll, grid);
         }
 
         public void ReadSupplier(DataGrid grid)

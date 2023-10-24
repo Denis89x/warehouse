@@ -50,26 +50,25 @@ Height="600" Width="650"
             Margin="0 0 0 180">
         </Label>
         <ComboBox
-            x:Name="SupplierComboBox"
+            x:Name="ProductComboBox"
             Width="225px"
             Height="40px"
             FontSize="15px"
             Padding="12 0 12 0"
             Margin="0 0 0 40"
-            materialDesign:HintAssist.Hint="Поставщик"
+            materialDesign:HintAssist.Hint="Продукт"
             Style="{StaticResource MaterialDesignOutlinedComboBox}"
             BorderBrush="#BC989393">
         </ComboBox>
         <TextBox
-            x:Name="ProductCost"
+            x:Name="ProductQuantity"
             materialDesign:HintAssist.Hint="Количество"
             FontSize="15px"
             Padding="12 10 2 2"
             Height="40px"
             Width="225px"
             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
-            Margin="0 60 0 0" 
-            IsReadOnly="True"
+            Margin="0 60 0 0"
             BorderBrush="#BC989393">
         </TextBox>
         <Button

@@ -1,17 +1,24 @@
 ﻿using System.Windows;
+using Warehouse.DTO;
+using Warehouse.Service;
 
 namespace Warehouse.View.AddPage
 {
     public partial class OrderAdd : Window
     {
+        Database database = new Database();
+        ValidationFileds validation = new ValidationFileds();
+
         public OrderAdd()
         {
+            database.ReadSupplierToComboBox(SupplierComboBox);
             InitializeComponent();
         }
 
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
         {
-
+            AddFromComboBoxOrder add = new AddFromComboBoxOrder(SupplierGrid, ProductCost);
+            add.ShowDialog();
         }
 
         private void NextToAdd_Click(object sender, RoutedEventArgs e)
@@ -59,6 +66,9 @@ namespace Warehouse.View.AddPage
 
         private void CompleteButton_Click(object sender, RoutedEventArgs e)
         {
+            ComboBoxDTO supplier = (ComboBoxDTO)SupplierComboBox.SelectedItem;
+
+            database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), OrderTypeComboBox.SelectedItem.ToString());
 
         }
     }

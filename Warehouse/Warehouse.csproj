@@ -87,6 +87,10 @@
       <DependentUpon>PrfSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\ValidationFileds.cs" />
+    <Compile Include="Storage\ComboBoxOrder.cs" />
+    <Compile Include="View\AddPage\AddFromComboBoxOrder.xaml.cs">
+      <DependentUpon>AddFromComboBoxOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddPage\OrderAdd.xaml.cs">
       <DependentUpon>OrderAdd.xaml</DependentUpon>
     </Compile>
@@ -125,6 +129,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Profile\PrfSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddPage\AddFromComboBoxOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

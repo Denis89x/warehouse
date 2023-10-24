@@ -59,3 +59,5 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\SupplierAdd.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\OrderAdd.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\OrderAdd.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\AddFromComboBoxOrder.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\AddFromComboBoxOrder.baml

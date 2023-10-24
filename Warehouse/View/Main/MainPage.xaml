@@ -230,6 +230,13 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
+            <Button 
+            x:Name="OrderButtontetet"
+            Width="50px"
+            Click="OrderButtontetet_Click"
+            Visibility="Visible"
+                VerticalAlignment="Bottom">
+            </Button>
         </Grid>
     </Grid>
 </Window>

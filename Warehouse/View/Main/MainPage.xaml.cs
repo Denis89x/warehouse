@@ -111,5 +111,12 @@ namespace Warehouse.View.Main
         {
 
         }
+
+        private void OrderButtontetet_Click(object sender, RoutedEventArgs e)
+        {
+            OrderAdd order = new OrderAdd();
+            order.Show();
+            this.Hide();
+        }
     }
 }

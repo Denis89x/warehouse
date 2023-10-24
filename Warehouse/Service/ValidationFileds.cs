@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using Warehouse.DTO;
 
@@ -55,19 +53,13 @@ namespace Warehouse.Service
                 return false;
 
             if (!ValidationSurname(surname))
-            {
                 return false;
-            }
 
             if (!ValidationFirstName(firstName))
-            {
                 return false;
-            }
 
             if (!ValidationMiddleName(middleName))
-            {
                 return false;
-            }
 
             return true;
         }
@@ -79,6 +71,39 @@ namespace Warehouse.Service
             if (!Regex.IsMatch(phoneNumber, pattern))
             {
                 MessageBox.Show("Введите корректный номер телефона! Пример: +375441234567");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidationAddFromComboBoxOrder(string quantity, ComboBoxDTO box)
+        {
+            if (!ValidationComboBoxProduct(box))
+                return false;
+
+            if (!ValidationProductQuantity(quantity))
+                return false;
+
+            return true;
+        }
+
+        private bool ValidationProductQuantity(string quantity)
+        {
+            string pattern = @"^\d+$";
+
+
+            if (int.TryParse(quantity, out int quantityInt))
+            {
+                if (!Regex.IsMatch(quantityInt.ToString(), pattern) || quantityInt <= 0 || quantityInt > 1000)
+                {
+                    MessageBox.Show("Число должно быть больше 0 и не больше 1000");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите число!");
                 return false;
             }
 
@@ -126,6 +151,17 @@ namespace Warehouse.Service
             return true;
         }
 
+        public bool ValidationComboBoxProduct(ComboBoxDTO combo)
+        {
+            if (combo == null)
+            {
+                MessageBox.Show("Выберите продукт!");
+                return false;
+            }
+
+            return true;
+        }
+
         public bool ValidationProductDescription(string description)
         {
             string pattern = @"^[a-zA-Zа-яА-Я\s]{3,60}$";
@@ -145,6 +181,14 @@ namespace Warehouse.Service
                 return result;
 
             return 0.0;
+        }
+
+        public int CastQuantityToInt(string quantity)
+        {
+            if (int.TryParse(quantity, out int result))
+                return result;
+
+            return 0;
         }
 
         public bool ValidationCost(string cost)
