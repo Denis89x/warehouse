@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 using Warehouse.Profile;
 using Warehouse.Storage;
@@ -127,6 +128,98 @@ namespace Warehouse.View.Main
             order.Show();
             ComboBoxOrder.dicrtionaryWithId1.Clear();
             ComboBoxOrder.dicrtionaryWithName.Clear();
+        }
+
+        private void DeleteSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView selectedRow = SupplierGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                try
+                {
+                    database.DeleteSupplier(selectedRow);
+                } catch (SqlException)
+                {
+                    MessageBox.Show("Удаление невозможно. Удалите связанные данные с этим поставщиком!");
+                    return;
+                }
+
+                database.ReadSupplier(SupplierGrid);
+            }
+            else
+            {
+                MessageBox.Show("Выберите поле для удаления!");
+            }
+        }
+
+        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView selectedRow = ProductGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                try
+                {
+                    database.DeleteProduct(selectedRow);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Удаление невозможно. Удалите связанные данные с этим продуктом!");
+                    return;
+                }
+
+                database.ReadProduct(ProductGrid);
+            }
+            else
+            {
+                MessageBox.Show("Выберите поле для удаления!");
+            }
+        }
+
+        private void DeleteProductType_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView selectedRow = ProductTypeGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                try
+                {
+                    database.DeleteProductType(selectedRow);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Удаление невозможно. Удалите связанные данные с этим типом продукта!");
+                    return;
+                }
+
+                database.ReadProductType(ProductTypeGrid);
+            }
+            else
+            {
+                MessageBox.Show("Выберите поле для удаления!");
+            }
+        }
+
+        private void DeleteOrder_Click(object sender, RoutedEventArgs e)
+        {
+            DataRowView selectedRow = OrderGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                try
+                {
+                    database.DeleteOrder(selectedRow);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Удаление невозможно. Удалите связанные данные!");
+                    return;
+                }
+
+                DataTable orderTable = database.GetOrdersWithProducts();
+                OrderGrid.ItemsSource = orderTable.DefaultView;
+            } 
+            else
+            {
+                MessageBox.Show("Выберите поле для удаления!");
+            }
         }
     }
 }

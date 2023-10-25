@@ -94,8 +94,8 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditClient" Header="Редактировать"/>
-                        <MenuItem x:Name="DeleteClient"  Header="Удалить"/>
+                        <MenuItem x:Name="EditClientOrder" Header="Редактировать"/>
+                        <MenuItem x:Name="DeleteOrder"  Header="Удалить" Click="DeleteOrder_Click"/>
                         <MenuItem x:Name="Add" Header="Добавить" Click="OrderButtontetet_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
@@ -121,7 +121,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="EditProductType" Header="Редактировать"/>
-                        <MenuItem x:Name="DeleteProductType"  Header="Удалить"/>
+                        <MenuItem x:Name="DeleteProductType"  Header="Удалить" Click="DeleteProductType_Click"/>
                         <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
@@ -151,7 +151,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="EditProduct" Header="Редактировать"/>
-                        <MenuItem x:Name="DeleteProduct"  Header="Удалить"/>
+                        <MenuItem x:Name="DeleteProduct"  Header="Удалить" Click="DeleteProduct_Click"/>
                         <MenuItem x:Name="AddProduct" Header="Добавить" Click="AddProduct_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
@@ -182,7 +182,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="EditSupplier" Header="Редактировать"/>
-                        <MenuItem x:Name="DeleteSupplier" Header="Удалить"/>
+                        <MenuItem x:Name="DeleteSupplier" Header="Удалить" Click="DeleteSupplier_Click"/>
                         <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>

@@ -202,6 +202,27 @@ namespace Warehouse
             Connection();
         }
 
+        public void DeleteSupplier(DataRowView selectedRow)
+        {
+            Update($"DELETE FROM Supplier Where supplier_id = {selectedRow.Row.ItemArray[0]}");
+        }
+
+        public void DeleteProduct(DataRowView selectedRow)
+        {
+            Update($"DELETE FROM Product Where product_id = {selectedRow.Row.ItemArray[0]}");
+        }
+
+        public void DeleteProductType(DataRowView selectedRow)
+        {
+            Update($"DELETE FROM Product_type Where product_type_id = {selectedRow.Row.ItemArray[0]}");
+        }
+
+        public void DeleteOrder(DataRowView selectedRow)
+        {
+            Update($"DELETE FROM order_composition Where order_id = {selectedRow.Row.ItemArray[0]}");
+            Update($"DELETE FROM ord Where order_id = {selectedRow.Row.ItemArray[0]}");
+        }
+
         public void ReadProductType(DataGrid grid)
         {
             Select(selectProductType, grid);
@@ -226,20 +247,6 @@ namespace Warehouse
         {
             Select(selectProduct, grid);
         }
-
-        /*        public void ReadOrder(long id)
-                {
-                    string query = $"SELECT product.title FROM product JOIN order_composition ON product.product_id = order_composition.product_id WHERE order_composition.order_id = {id}";
-
-                    Select(query, grid);
-                }
-
-                public void ReadOrder(DataGrid grid)
-                {
-                    string selectOrderWithoutProducts = $"select DISTINCT ord.order_id, supplier.title, account.surname, ord.amount, ord.order_date, ord.order_type from ord, supplier, account, order_composition where ord.supplier_id = supplier.supplier_id AND ord.account_id = account.account_id";
-
-                    Select(selectOrderWithoutProducts, grid);
-                }*/
 
         public DataTable GetOrdersWithProducts()
         {
