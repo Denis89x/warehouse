@@ -181,7 +181,7 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditSupplier" Header="Редактировать"/>
+                        <MenuItem x:Name="EditSupplier" Header="Редактировать" Click="EditSupplier_Click"/>
                         <MenuItem x:Name="DeleteSupplier" Header="Удалить" Click="DeleteSupplier_Click"/>
                         <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
                     </ContextMenu>

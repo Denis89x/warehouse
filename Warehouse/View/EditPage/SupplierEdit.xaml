@@ -1,0 +1,188 @@
+﻿<Window x:Class="Warehouse.View.EditPage.SupplierEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.View.EditPage"
+        mc:Ignorable="d"
+        Height="600" Width="650"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="#FF22A4E8"
+        ResizeMode="CanMinimize"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <materialDesign:PackIcon 
+            Height="55px"
+            Width="55px"
+            HorizontalAlignment="Center"
+            Margin="0 35 0 0"
+            Kind="Pencil"
+            Foreground="White"/>
+        <Border 
+            Background="White"
+            CornerRadius="10" 
+            BorderBrush="Black"
+            Height="300px" 
+            Width="300px" 
+            Padding="10">
+            <Border.Effect>
+                <DropShadowEffect 
+                    ShadowDepth="0" 
+                    Color="Black" 
+                    Opacity="0.3" 
+                    BlurRadius="15" 
+                    Direction="360" 
+                    RenderingBias="Quality"/>
+            </Border.Effect>
+        </Border>
+        <Label 
+            FontSize="18px"
+            Height="30px"
+            Content="Редактировать"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0 0 0 220">
+        </Label>
+        <TextBox
+            x:Name="SupplierTitleBox"
+            materialDesign:HintAssist.Hint="Наименование"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 110" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="SupplierAdressBox"
+            materialDesign:HintAssist.Hint="Адрес"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 10" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="SupplierPhoneBox"
+            materialDesign:HintAssist.Hint="Номер телефона"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 90 0 0" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="SurnameBox"
+            Visibility="Collapsed"
+            materialDesign:HintAssist.Hint="Фамилия"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 110" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="FirstNameBox"
+            Visibility="Collapsed"
+            materialDesign:HintAssist.Hint="Имя"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 0 0 10" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <TextBox
+            x:Name="MiddleNameBox"
+            Visibility="Collapsed"
+            materialDesign:HintAssist.Hint="Отчество"
+            FontSize="15px"
+            Padding="12 10 2 2"
+            Height="40px"
+            Width="225px"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Margin="0 90 0 0" 
+            BorderBrush="#BC989393">
+        </TextBox>
+        <Button
+            x:Name="Return"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вернуться"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 225 120 0"
+            Click="Return_Click">
+        </Button>
+        <Button
+            x:Name="Next"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Дальше"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 225 0 0"
+            Click="Next_Click">
+        </Button>
+        <Button
+            x:Name="Preview"
+            Width="105px"
+            Height="45px"
+            Visibility="Collapsed"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Назад"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 225 120 0"
+            Click="Preview_Click">
+        </Button>
+        <Button
+            x:Name="Confirm"
+            Visibility="Collapsed"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Добавить"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 225 0 0"
+            Click="Confirm_Click">
+        </Button>
+    </Grid>
+</Window>

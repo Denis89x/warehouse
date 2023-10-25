@@ -61,3 +61,11 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\OrderAdd.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\AddFromComboBoxOrder.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\AddPage\AddFromComboBoxOrder.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\OrderEdit.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductEdit.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductTypeEdit.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\SupplierEdit.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\OrderEdit.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductEdit.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductTypeEdit.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\SupplierEdit.baml

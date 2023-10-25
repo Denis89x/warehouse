@@ -145,6 +145,11 @@ namespace Warehouse
             Update($"insert into supplier (title, address, phone_number, surname, first_name, middle_name) values (N'{title}', N'{address}', '{phoneNumber}', N'{surname}', N'{firstName}', N'{middleName}')");
         }
 
+        public void UpdateSupplier(long id, string title, string address, string phoneNumber, string surname, string firstName, string middleName)
+        {
+            Update($"update supplier set title = N'{title}', address = N'{address}', phone_number = '{phoneNumber}', surname = N'{surname}', first_name = N'{firstName}', middle_name = N'{middleName}' where supplier_id = '{id}'");
+        }
+
         public long GetAccountId()
         {
             SqlCommand command = new SqlCommand($"Select account_id from account where username = '{AuthManager.CurrentUsername}'", sqlConnection);

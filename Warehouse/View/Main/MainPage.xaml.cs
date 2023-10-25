@@ -1,9 +1,11 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 using Warehouse.Profile;
 using Warehouse.Storage;
 using Warehouse.View.AddPage;
+using Warehouse.View.EditPage;
 
 namespace Warehouse.View.Main
 {
@@ -219,6 +221,21 @@ namespace Warehouse.View.Main
             else
             {
                 MessageBox.Show("Выберите поле для удаления!");
+            }
+        }
+
+        private void EditSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRow = SupplierGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                SupplierEdit supplierEdit = new SupplierEdit(Convert.ToInt32(selectedRow.Row.ItemArray[0]), Convert.ToString(selectedRow.Row.ItemArray[1]), Convert.ToString(selectedRow.Row.ItemArray[2]), Convert.ToString(selectedRow.Row.ItemArray[3]), Convert.ToString(selectedRow.Row.ItemArray[4]), Convert.ToString(selectedRow.Row.ItemArray[5]), Convert.ToString(selectedRow.Row.ItemArray[6]), SupplierGrid);
+                supplierEdit.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана строка для редактирования", "Ошибка", MessageBoxButton.OK);
             }
         }
     }
