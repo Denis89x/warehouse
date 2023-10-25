@@ -120,7 +120,7 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditProductType" Header="Редактировать"/>
+                        <MenuItem x:Name="EditProductType" Header="Редактировать" Click="EditProductType_Click"/>
                         <MenuItem x:Name="DeleteProductType"  Header="Удалить" Click="DeleteProductType_Click"/>
                         <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
                     </ContextMenu>

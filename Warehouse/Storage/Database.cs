@@ -135,6 +135,11 @@ namespace Warehouse
             Update($"insert into product_type (type_name) values (N'{title.ToLower()}')");
         }
 
+        public void UpdateProductType(long id, string title)
+        {
+            Update($"update product_type set type_name = N'{title}' where product_type_id = '{id}'");
+        }
+
         public void CreateProduct(string title, double cost, string description, ComboBoxDTO dto)
         {
             Update($"insert into product (product_type_id, presence, cost, description, title) values ('{dto.id}', '{0}', '{cost}', N'{description}', N'{title}')");
