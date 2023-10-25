@@ -179,7 +179,7 @@
             BorderBrush="Transparent"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Content="Добавить"
+            Content="Изменить"
             RenderOptions.EdgeMode="Aliased"
             Margin="120 225 0 0"
             Click="Confirm_Click">

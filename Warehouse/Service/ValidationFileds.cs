@@ -128,6 +128,20 @@ namespace Warehouse.Service
             return true;
         }
 
+        public bool ValidationProductEdit(string title, string cost, string description)
+        {
+            if (!ValidationProductTypeTitle(title))
+                return false;
+
+            if (!ValidationCost(cost))
+                return false;
+
+            if (!ValidationProductDescription(description))
+                return false;
+
+            return true;
+        }
+
         public bool ValidationAddress(string address)
         {
             string pattern = @"^[a-zA-Zа-яА-Я\s]{3,40}$";

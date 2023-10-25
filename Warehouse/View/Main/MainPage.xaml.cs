@@ -238,5 +238,20 @@ namespace Warehouse.View.Main
                 MessageBox.Show("Не выбрана строка для редактирования", "Ошибка", MessageBoxButton.OK);
             }
         }
+
+        private void EditProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedRow = ProductGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                ProductEdit productEdit = new ProductEdit(Convert.ToInt32(selectedRow.Row.ItemArray[0]), Convert.ToString(selectedRow.Row.ItemArray[5]), Convert.ToString(selectedRow.Row.ItemArray[1]), Convert.ToString(selectedRow.Row.ItemArray[3]), Convert.ToString(selectedRow.Row.ItemArray[4]), ProductGrid);
+                productEdit.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана строка для редактирования", "Ошибка", MessageBoxButton.OK);
+            }
+        }
     }
 }

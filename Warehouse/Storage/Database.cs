@@ -140,6 +140,11 @@ namespace Warehouse
             Update($"insert into product (product_type_id, presence, cost, description, title) values ('{dto.id}', '{0}', '{cost}', N'{description}', N'{title}')");
         }
 
+        public void UpdateProduct(long id, string title, double cost, string description)
+        {
+            Update($"update product set title = N'{title}', cost = '{cost}', description = N'{description}' where product_id = '{id}'");
+        }
+
         public void CreateSupplier(string title, string address, string phoneNumber, string surname, string firstName, string middleName)
         {
             Update($"insert into supplier (title, address, phone_number, surname, first_name, middle_name) values (N'{title}', N'{address}', '{phoneNumber}', N'{surname}', N'{firstName}', N'{middleName}')");
