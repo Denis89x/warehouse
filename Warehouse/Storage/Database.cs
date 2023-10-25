@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
 using Warehouse.Service;
 using Warehouse.Storage;
+using Warehouse.View.AddPage;
 
 namespace Warehouse
 {
@@ -169,6 +171,20 @@ namespace Warehouse
         {
             Connection();
 
+            if (orderType.Equals("Выбытие"))
+            {
+                foreach (DictionaryEntry item in ComboBoxOrder.dicrtionaryWithId1)
+                {
+                    SqlCommand commandToQuantity = new SqlCommand($"SELECT presence FROM product WHERE product_id = '{(long)item.Key}'", sqlConnection);
+                    decimal presence = (decimal)commandToQuantity.ExecuteScalar();
+
+                    if (presence < (int)item.Value) {
+                        MessageBox.Show($"Количество на убытие указано не верно! Текущий остаток: {presence}");
+                        return;
+                    }
+                }
+            }
+
             string orderDate = DateTime.Today.ToString("yyyy-MM-dd");
 
             SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) output inserted.order_id values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{orderDate}', N'{orderType}')", sqlConnection);
@@ -177,6 +193,10 @@ namespace Warehouse
             foreach (DictionaryEntry item in ComboBoxOrder.dicrtionaryWithId1)
             {
                 Update($"insert into order_composition (product_id, order_id, quantity) values ('{(long)item.Key}', '{orderId}', '{(int)item.Value}')");
+                if (orderType.Equals("Поступление"))
+                    Update($"UPDATE product set presence = presence + '{(int)item.Value}' where product_id = '{(long)item.Key}'");
+                if (orderType.Equals("Выбытие"))
+                    Update($"UPDATE product set presence = presence - '{(int)item.Value}' where product_id = '{(long)item.Key}'");
             }
 
             Connection();
