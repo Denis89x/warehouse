@@ -83,19 +83,20 @@
             Style="{StaticResource MaterialDesignOutlinedTextBox}" 
             Margin="0 40 0 0" 
             IsReadOnly="True"
+            IsEnabled="False"
             BorderBrush="#BC989393">
         </TextBox>
-        <TextBox
+        <DatePicker 
             x:Name="Date"
-            materialDesign:HintAssist.Hint="Дата заказа"
             FontSize="15px"
-            Padding="12 10 2 2"
+            Padding="12 0 12 0"
             Height="40px"
             Width="225px"
-            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
             Margin="0 140 0 0" 
-            BorderBrush="#BC989393">
-        </TextBox>
+            Grid.Row="4"
+            Grid.Column="4"
+            Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+            BorderBrush="#BC989393"/>
         <Button
             x:Name="NextToAdd"
             Width="105px"
@@ -181,18 +182,18 @@
         <DataGrid   
             Visibility="Collapsed"
             Margin="175,180,175,180" 
-                x:Name="SupplierGrid" 
-                Background="White"
-                AutoGenerateColumns="false"
-                CanUserResizeColumns="False" 
-                CanUserAddRows="False" 
-                CanUserDeleteRows="True" 
-                CanUserReorderColumns="False" 
-                SelectionMode="Single" 
-                SelectionUnit="FullRow" 
-                CanUserResizeRows="False" 
-                IsReadOnly="True"
-                Foreground="#FF7643D2">
+            x:Name="SupplierGrid" 
+            Background="White"
+            AutoGenerateColumns="false"
+            CanUserResizeColumns="False" 
+            CanUserAddRows="False" 
+            CanUserDeleteRows="True" 
+            CanUserReorderColumns="False" 
+            SelectionMode="Single" 
+            SelectionUnit="FullRow" 
+            CanUserResizeRows="False" 
+            IsReadOnly="True"
+            Foreground="#FF7643D2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Width="*" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Quantity}"/>

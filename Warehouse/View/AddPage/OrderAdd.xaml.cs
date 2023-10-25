@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
@@ -17,6 +18,7 @@ namespace Warehouse.View.AddPage
             InitializeComponent();
             database.ReadSupplierToComboBox(SupplierComboBox);
             this.grid = grid;
+            Date.SelectedDate = DateTime.Today;
         }
 
         private void AddSupplier_Click(object sender, RoutedEventArgs e)
@@ -27,7 +29,7 @@ namespace Warehouse.View.AddPage
 
         private void NextToAdd_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -71,11 +73,17 @@ namespace Warehouse.View.AddPage
         private void CompleteButton_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxDTO supplier = (ComboBoxDTO)SupplierComboBox.SelectedItem;
+            string orderDate = Date.SelectedDate.Value.ToString("yyyy-MM-dd");
 
-            database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), ((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString());
-            DataTable orderTable = database.GetOrdersWithProducts();
-            grid.ItemsSource = orderTable.DefaultView;
-            this.Close();
+            ValidationFileds validation = new ValidationFileds();
+
+            if (validation.ValidationComboBoxProduct(supplier, "поставщика") && validation.ValidationComboBox(((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), "Тип заказа") && validation.ValidateAmount(ProductCost.Text))
+            {
+                database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), ((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), orderDate);
+                DataTable orderTable = database.GetOrdersWithProducts();
+                grid.ItemsSource = orderTable.DefaultView;
+                this.Close();
+            }
         }
     }
 }

@@ -76,7 +76,7 @@
                     <DataGridTextColumn Header="Поставщик" Width="*"  Binding="{Binding title}"/>
                     <DataGridTextColumn Header="Сотрудник" Width="*"  Binding="{Binding surname}"/>
                     <DataGridTextColumn Header="Сумма" Width="*"  Binding="{Binding amount}"/>
-                    <DataGridTextColumn Header="Дата" Width="*"  Binding="{Binding order_date}"/>
+                    <DataGridTextColumn Header="Дата" Width="*"  Binding="{Binding order_date, StringFormat=dd.MM.yyyy}"/>
                     <DataGridTextColumn Header="Тип" Width="*"  Binding="{Binding order_type}"/>
                     <DataGridTemplateColumn Header="Товары" Width="*" >
                         <DataGridTemplateColumn.CellTemplate>

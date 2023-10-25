@@ -172,7 +172,7 @@ namespace Warehouse
             return id;
         }
 
-        public void CreateOrder(ComboBoxDTO supplierDTO, double amount, string orderType)
+        public void CreateOrder(ComboBoxDTO supplierDTO, double amount, string orderType, string orderDate)
         {
             Connection();
 
@@ -189,8 +189,6 @@ namespace Warehouse
                     }
                 }
             }
-
-            string orderDate = DateTime.Today.ToString("yyyy-MM-dd");
 
             SqlCommand command = new SqlCommand($"insert into ord (supplier_id, account_id, amount, order_date, order_type) output inserted.order_id values ('{supplierDTO.id}', '{GetAccountId()}', '{amount}', '{orderDate}', N'{orderType}')", sqlConnection);
             long orderId = (long)command.ExecuteScalar();

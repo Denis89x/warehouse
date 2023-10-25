@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using Warehouse.DTO;
 
 namespace Warehouse.Service
@@ -79,7 +80,7 @@ namespace Warehouse.Service
 
         public bool ValidationAddFromComboBoxOrder(string quantity, ComboBoxDTO box)
         {
-            if (!ValidationComboBoxProduct(box))
+            if (!ValidationComboBoxProduct(box, "продукт"))
                 return false;
 
             if (!ValidationProductQuantity(quantity))
@@ -151,11 +152,33 @@ namespace Warehouse.Service
             return true;
         }
 
-        public bool ValidationComboBoxProduct(ComboBoxDTO combo)
+        public bool ValidationComboBox(string box, string type)
+        {
+            if (box.Equals("") || box == null)
+            {
+                MessageBox.Show($"Выберите {type}!");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidateAmount(string  amount)
+        {
+            if (amount == null || amount.Equals(""))
+            {
+                MessageBox.Show("Выберите хотя-бы один товар!");
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool ValidationComboBoxProduct(ComboBoxDTO combo, string type)
         {
             if (combo == null)
             {
-                MessageBox.Show("Выберите продукт!");
+                MessageBox.Show($"Выберите {type}!");
                 return false;
             }
 
