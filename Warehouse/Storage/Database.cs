@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
@@ -215,6 +216,78 @@ namespace Warehouse
             Connection();
         }
 
+        /*public void DeleteOrder(DataRowView selectedRow)
+        {
+            Update($"DELETE FROM order_composition Where order_id = {selectedRow.Row.ItemArray[0]}");
+            Update($"DELETE FROM ord Where order_id = {selectedRow.Row.ItemArray[0]}");
+
+            
+        }*/
+
+        public void DeleteOrder(DataRowView selectedRow)
+        {
+            Connection();
+
+            long orderId = (long)selectedRow.Row.ItemArray[0];
+
+            string orderType = GetOrderType(orderId);
+
+            Dictionary<long, int> products = GetOrderCompositionProducts(orderId);
+
+            foreach (var product in products)
+            {
+                if (orderType.Equals("Поступление"))
+                    Update($"UPDATE product SET presence = presence - {product.Value} WHERE product_id = {product.Key}");
+                if (orderType.Equals("Выбытие"))
+                    Update($"UPDATE product SET presence = presence + {product.Value} WHERE product_id = {product.Key}");
+            }
+
+            Update($"DELETE FROM order_composition WHERE order_id = {orderId}");
+            Update($"DELETE FROM ord WHERE order_id = {orderId}");
+            
+            Connection();
+        }
+
+        private string GetOrderType(long orderId)
+        {
+            if (sqlConnection.State == ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            SqlCommand command = new SqlCommand($"SELECT order_type FROM ord WHERE order_id = {orderId}", sqlConnection);
+
+            return (string)command.ExecuteScalar();
+        }
+
+        private Dictionary<long, int> GetOrderCompositionProducts(long orderId)
+        {
+
+            if (sqlConnection.State == ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+
+            Dictionary<long, int> products = new Dictionary<long, int>();
+
+            SqlCommand command = new SqlCommand($"SELECT product_id, quantity FROM order_composition WHERE order_id = {orderId}", sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                long productId = (long)reader["product_id"];
+                int quantity = (int)reader["quantity"];
+                products.Add(productId, quantity);
+            }
+
+            reader.Close();
+
+            Connection();
+
+            return products;
+        }
+
+
         public void DeleteSupplier(DataRowView selectedRow)
         {
             Update($"DELETE FROM Supplier Where supplier_id = {selectedRow.Row.ItemArray[0]}");
@@ -228,12 +301,6 @@ namespace Warehouse
         public void DeleteProductType(DataRowView selectedRow)
         {
             Update($"DELETE FROM Product_type Where product_type_id = {selectedRow.Row.ItemArray[0]}");
-        }
-
-        public void DeleteOrder(DataRowView selectedRow)
-        {
-            Update($"DELETE FROM order_composition Where order_id = {selectedRow.Row.ItemArray[0]}");
-            Update($"DELETE FROM ord Where order_id = {selectedRow.Row.ItemArray[0]}");
         }
 
         public void ReadProductType(DataGrid grid)
