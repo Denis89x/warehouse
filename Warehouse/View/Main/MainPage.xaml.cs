@@ -2,16 +2,20 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Windows.Controls;
 using Warehouse.Profile;
+using Warehouse.Service;
 using Warehouse.Storage;
 using Warehouse.View.AddPage;
 using Warehouse.View.EditPage;
+using Warehouse.View.FIltrationAndSearch;
 
 namespace Warehouse.View.Main
 {
     public partial class MainPage : Window
     {
-        Database database = new Database();
+        private Database database = new Database();
+        private MainLogic mainLogic;
 
         public MainPage()
         {
@@ -27,6 +31,9 @@ namespace Warehouse.View.Main
                     AdminRegistration.Visibility = Visibility.Visible;
                 }
             }
+
+            mainLogic = new MainLogic();
+
             DataTable orderTable = database.GetOrdersWithProducts();
             OrderGrid.ItemsSource = orderTable.DefaultView;
         }
@@ -267,6 +274,99 @@ namespace Warehouse.View.Main
             {
                 MessageBox.Show("Не выбрана строка для редактирования", "Ошибка", MessageBoxButton.OK);
             }
+        }
+
+        private void FiltrationOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Filtration filtration = new Filtration();
+            filtration.ShowDialog();
+
+            string field = filtration.Field;
+
+            mainLogic.ApplyFilter(field, OrderGrid);
+        }
+
+        private void FiltrationProductType_Click(object sender, RoutedEventArgs e)
+        {
+            Filtration filtration = new Filtration();
+            filtration.ShowDialog();
+
+            string field = filtration.Field;
+
+            mainLogic.ApplyFilter(field, ProductTypeGrid);
+        }
+
+        private void FiltrationProduct_Click(object sender, RoutedEventArgs e)
+        {
+            Filtration filtration = new Filtration();
+            filtration.ShowDialog();
+
+            string field = filtration.Field;
+
+            mainLogic.ApplyFilter(field, ProductGrid);
+        }
+
+        private void FiltrationSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            Filtration filtration = new Filtration();
+            filtration.ShowDialog();
+
+            string field = filtration.Field;
+
+            mainLogic.ApplyFilter(field, SupplierGrid);
+        }
+
+        private void SearchOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Search search = new Search();
+            search.ShowDialog();
+
+            mainLogic.SearchAndSort(search.Field, OrderGrid);
+        }
+
+        private void SearchProductType_Click(object sender, RoutedEventArgs e)
+        {
+            Search search = new Search();
+            search.ShowDialog();
+
+            mainLogic.SearchAndSort(search.Field, ProductTypeGrid);
+        }
+
+        private void SearchSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            Search search = new Search();
+            search.ShowDialog();
+
+            mainLogic.SearchAndSort(search.Field, SupplierGrid);
+        }
+
+        private void SearchProduct_Click(object sender, RoutedEventArgs e)
+        {
+            Search search = new Search();
+            search.ShowDialog();
+
+            mainLogic.SearchAndSort(search.Field, ProductGrid);
+        }
+
+        private void OrderCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable orderTable = database.GetOrdersWithProducts();
+            OrderGrid.ItemsSource = orderTable.DefaultView;
+        }
+
+        private void ProductTypeCancel_Click(object sender, RoutedEventArgs e)
+        {
+            database.ReadProductType(ProductTypeGrid);
+        }
+
+        private void ProductCancel_Click(object sender, RoutedEventArgs e)
+        {
+            database.ReadProduct(ProductGrid);
+        }
+
+        private void SupplierCancel_Click(object sender, RoutedEventArgs e)
+        {
+            database.ReadSupplier(SupplierGrid);
         }
     }
 }

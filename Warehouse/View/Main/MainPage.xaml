@@ -94,9 +94,11 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="EditClientOrder" Header="Редактировать"/>
-                        <MenuItem x:Name="DeleteOrder"  Header="Удалить" Click="DeleteOrder_Click"/>
                         <MenuItem x:Name="Add" Header="Добавить" Click="OrderButtontetet_Click"/>
+                        <MenuItem x:Name="DeleteOrder" Header="Удалить" Click="DeleteOrder_Click"/>
+                        <MenuItem x:Name="FiltrationOrder" Header="Фильтрация" Click="FiltrationOrder_Click"/>
+                        <MenuItem x:Name="SearchOrder" Header="Поиск" Click="SearchOrder_Click"/>
+                        <MenuItem x:Name="OrderCancel" Header="Отменить" Click="OrderCancel_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -120,9 +122,12 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
                         <MenuItem x:Name="EditProductType" Header="Редактировать" Click="EditProductType_Click"/>
                         <MenuItem x:Name="DeleteProductType"  Header="Удалить" Click="DeleteProductType_Click"/>
-                        <MenuItem x:Name="AddProductType" Header="Добавить" Click="AddProductType_Click"/>
+                        <MenuItem x:Name="FiltrationProductType" Header="Фильтрация" Click="FiltrationProductType_Click"/>
+                        <MenuItem x:Name="SearchProductType" Header="Поиск" Click="SearchProductType_Click"/>
+                        <MenuItem x:Name="ProductTypeCancel" Header="Отменить" Click="ProductTypeCancel_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -150,9 +155,12 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem x:Name="AddProduct" Header="Добавить" Click="AddProduct_Click"/>
                         <MenuItem x:Name="EditProduct" Header="Редактировать" Click="EditProduct_Click"/>
                         <MenuItem x:Name="DeleteProduct"  Header="Удалить" Click="DeleteProduct_Click"/>
-                        <MenuItem x:Name="AddProduct" Header="Добавить" Click="AddProduct_Click"/>
+                        <MenuItem x:Name="FiltrationProduct" Header="Фильтраци" Click="FiltrationProduct_Click"/>
+                        <MenuItem x:Name="SearchProduct" Header="Поиск" Click="SearchProduct_Click"/>
+                        <MenuItem x:Name="ProductCancel" Header="Отменить" Click="ProductCancel_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -181,9 +189,12 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
                         <MenuItem x:Name="EditSupplier" Header="Редактировать" Click="EditSupplier_Click"/>
                         <MenuItem x:Name="DeleteSupplier" Header="Удалить" Click="DeleteSupplier_Click"/>
-                        <MenuItem x:Name="AddSupplier" Header="Добавить" Click="AddSupplier_Click"/>
+                        <MenuItem x:Name="FiltrationSupplier" Header="Фильтрация" Click="FiltrationSupplier_Click"/>
+                        <MenuItem x:Name="SearchSupplier" Header="Поиск" Click="SearchSupplier_Click"/>
+                        <MenuItem x:Name="SupplierCancel" Header="Отменить" Click="SupplierCancel_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

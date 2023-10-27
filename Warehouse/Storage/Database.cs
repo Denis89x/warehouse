@@ -216,14 +216,6 @@ namespace Warehouse
             Connection();
         }
 
-        /*public void DeleteOrder(DataRowView selectedRow)
-        {
-            Update($"DELETE FROM order_composition Where order_id = {selectedRow.Row.ItemArray[0]}");
-            Update($"DELETE FROM ord Where order_id = {selectedRow.Row.ItemArray[0]}");
-
-            
-        }*/
-
         public void DeleteOrder(DataRowView selectedRow)
         {
             Connection();

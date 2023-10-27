@@ -64,6 +64,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -86,6 +87,7 @@
     <Compile Include="Profile\PrfSettings.xaml.cs">
       <DependentUpon>PrfSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\MainLogic.cs" />
     <Compile Include="Service\ValidationFileds.cs" />
     <Compile Include="Storage\ComboBoxOrder.cs" />
     <Compile Include="View\AddPage\AddFromComboBoxOrder.xaml.cs">
@@ -114,6 +116,12 @@
     </Compile>
     <Compile Include="View\EditPage\SupplierEdit.xaml.cs">
       <DependentUpon>SupplierEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FIltrationAndSearch\Filtration.xaml.cs">
+      <DependentUpon>Filtration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FIltrationAndSearch\Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -180,6 +188,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\FIltrationAndSearch\Filtration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FIltrationAndSearch\Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Main\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +228,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

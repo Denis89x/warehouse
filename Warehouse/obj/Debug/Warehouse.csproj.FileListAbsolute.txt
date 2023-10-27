@@ -69,3 +69,7 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductEdit.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\ProductTypeEdit.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\EditPage\SupplierEdit.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Filtration.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Search.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Filtration.baml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Search.baml
