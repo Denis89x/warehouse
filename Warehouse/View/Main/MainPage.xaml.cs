@@ -9,6 +9,7 @@ using Warehouse.Storage;
 using Warehouse.View.AddPage;
 using Warehouse.View.EditPage;
 using Warehouse.View.FIltrationAndSearch;
+using Warehouse.View.OutputDocuments;
 
 namespace Warehouse.View.Main
 {
@@ -367,6 +368,12 @@ namespace Warehouse.View.Main
         private void SupplierCancel_Click(object sender, RoutedEventArgs e)
         {
             database.ReadSupplier(SupplierGrid);
+        }
+
+        private void Output_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainOutput main = new MainOutput(OrderGrid);
+            main.ShowDialog();
         }
     }
 }

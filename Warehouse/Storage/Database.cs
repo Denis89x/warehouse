@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
+using Warehouse.Model;
 using Warehouse.Service;
 using Warehouse.Storage;
-using Warehouse.View.AddPage;
 
 namespace Warehouse
 {
@@ -21,9 +23,8 @@ namespace Warehouse
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
         private string selectSupplier = $"select * from supplier";
         private string selectSupplierAll = $"select supplier_id, title from supplier";
-        
 
-        public void Connection()    
+        public void Connection()
         {
             if (sqlConnection.State == ConnectionState.Open)
             {
@@ -61,7 +62,7 @@ namespace Warehouse
             Connection();
 
             SqlCommand command = new SqlCommand($"Select cost from product where product_id = {id}", sqlConnection);
-            
+
             int cost = Convert.ToInt32(command.ExecuteScalar());
 
             Connection();
@@ -73,7 +74,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}'", sqlConnection);
-            int count = (int) command.ExecuteScalar();
+            int count = (int)command.ExecuteScalar();
             Connection();
             return count;
         }
@@ -82,7 +83,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}' AND Password='{PasswordEncoder.GetSHA256Hash(password)}'", sqlConnection);
-            int result = (int) command.ExecuteScalar();
+            int result = (int)command.ExecuteScalar();
             Connection();
 
             return result > 0;
@@ -92,7 +93,7 @@ namespace Warehouse
         {
             Connection();
             SqlCommand command = new SqlCommand($"SELECT COUNT(*) FROM Account WHERE username='{username}' AND role='ROLE_ADMIN'", sqlConnection);
-            int result = (int) command.ExecuteScalar();
+            int result = (int)command.ExecuteScalar();
             Connection();
 
             return result > 0;
@@ -129,6 +130,72 @@ namespace Warehouse
             SqlCommand command = new SqlCommand(query, sqlConnection);
             command.ExecuteNonQuery();
             Connection();
+        }
+
+        public OrderedDictionary GetProductWithOrderId()
+        {
+            OrderedDictionary productFromOrder = new OrderedDictionary();
+
+            string query = @"
+                SELECT ord.order_id, product.product_id, product.title
+                FROM ord
+                JOIN order_composition ON ord.order_id = order_composition.order_id
+                JOIN product ON order_composition.product_id = product.product_id";
+
+            DataTable result = Select(query);
+
+            foreach (DataRow row in result.Rows)
+            {
+                long orderId = (long)row["order_id"];
+                long productId = (long)row["product_id"];
+                string title = row["title"].ToString();
+
+                // Создание объекта Product
+                Product product = new Product
+                {
+                    id = productId,
+                    title = title,
+                    // Другие свойства продукта
+                };
+
+                // Добавление товара в список для данного заказа
+                if (productFromOrder.Contains(orderId))
+                {
+                    List<Product> products = (List<Product>)productFromOrder[orderId];
+                    products.Add(product);
+                }
+                else
+                {
+                    List<Product> products = new List<Product> { product };
+                    productFromOrder.Add(orderId, products);
+                }
+            }
+
+            return productFromOrder;
+            /*ShowProductFromOrder(productFromOrder);*/
+        }
+
+        public void ShowProductFromOrder(OrderedDictionary productFromOrder)
+        {
+            StringBuilder message = new StringBuilder();
+
+            foreach (DictionaryEntry entry in productFromOrder)
+            {
+                long orderId = (long)entry.Key;
+                List<Product> products = (List<Product>)entry.Value;
+
+                message.AppendLine($"Order ID: {orderId}");
+
+                foreach (Product product in products)
+                {
+                    message.AppendLine($"Product ID: {product.id}, Title: {product.title}");
+                    // Добавьте другие свойства продукта, если необходимо
+                }
+
+                message.AppendLine(); // Пустая строка между заказами
+            }
+
+            MessageBox.Show(message.ToString());
         }
 
         public void CreateProductType(string title)
@@ -194,7 +261,8 @@ namespace Warehouse
                     SqlCommand commandToQuantity = new SqlCommand($"SELECT presence FROM product WHERE product_id = '{(long)item.Key}'", sqlConnection);
                     decimal presence = (decimal)commandToQuantity.ExecuteScalar();
 
-                    if (presence < (int)item.Value) {
+                    if (presence < (int)item.Value)
+                    {
                         MessageBox.Show($"Количество на убытие указано не верно! Текущий остаток: {presence}");
                         return;
                     }
@@ -236,7 +304,7 @@ namespace Warehouse
 
             Update($"DELETE FROM order_composition WHERE order_id = {orderId}");
             Update($"DELETE FROM ord WHERE order_id = {orderId}");
-            
+
             Connection();
         }
 
@@ -279,7 +347,6 @@ namespace Warehouse
             return products;
         }
 
-
         public void DeleteSupplier(DataRowView selectedRow)
         {
             Update($"DELETE FROM Supplier Where supplier_id = {selectedRow.Row.ItemArray[0]}");
@@ -320,6 +387,7 @@ namespace Warehouse
             Select(selectProduct, grid);
         }
 
+
         public DataTable GetOrdersWithProducts()
         {
             Connection();
@@ -341,7 +409,6 @@ namespace Warehouse
 
             return orderTable;
         }
-
 
         public void ReadAddFromComboBoxOrder(DataGrid grid)
         {

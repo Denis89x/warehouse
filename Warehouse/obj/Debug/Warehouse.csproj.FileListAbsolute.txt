@@ -73,3 +73,12 @@ C:\Производственная практика\Warehouse\Warehouse\obj\Deb
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Search.g.cs
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Filtration.baml
 C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\FIltrationAndSearch\Search.baml
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\EPPlus.dll
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\EPPlus.Interfaces.dll
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\EPPlus.System.Drawing.dll
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\EPPlus.xml
+C:\Производственная практика\Warehouse\Warehouse\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\OutputDocuments\MainOutput.g.cs
+C:\Производственная практика\Warehouse\Warehouse\obj\Debug\View\OutputDocuments\MainOutput.baml
