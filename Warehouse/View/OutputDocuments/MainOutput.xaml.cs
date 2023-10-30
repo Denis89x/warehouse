@@ -46,6 +46,7 @@ namespace Warehouse.View.OutputDocuments
             SecondDate.Visibility = Visibility.Visible;
             ConfirmProduct.Visibility = Visibility.Visible;
             ReturnProduct.Visibility = Visibility.Visible;
+            PeriodLAbel.Visibility = Visibility.Visible;
         }
 
         private void ReturnProduct_Click(object sender, RoutedEventArgs e)
@@ -54,6 +55,7 @@ namespace Warehouse.View.OutputDocuments
             ReturnProduct.Visibility = Visibility.Collapsed;
             FirstDate.Visibility = Visibility.Collapsed;
             SecondDate.Visibility = Visibility.Collapsed;
+            PeriodLAbel.Visibility = Visibility.Collapsed;
 
             ProductFlowReport.Visibility = Visibility.Visible;
             Receipt.Visibility = Visibility.Visible;

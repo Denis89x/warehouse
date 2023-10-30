@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using Warehouse.Model;
 
@@ -34,13 +35,20 @@ namespace Warehouse.Service
                 worksheet.Cells["A2:G2"].Merge = true;
                 worksheet.Cells["A2:G2"].Value = dateRange;
                 worksheet.Cells["A2:G2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A3:G3"].Merge = true;
+                worksheet.Cells["A3:G3"].Value = "ОАО Гомельский Мясокомбинат";
+                worksheet.Cells["A3:G3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A4:G4"].Merge = true;
+                worksheet.Cells["A4:G4"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A4:G4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A5:G5"].Merge = true;
 
                 for (int i = 0; i < dataGrid.Columns.Count; i++)
                 {
-                    worksheet.Cells[4, i + 1].Value = dataGrid.Columns[i].Header;
+                    worksheet.Cells[6, i + 1].Value = dataGrid.Columns[i].Header;
                 }
 
-                int lastRow = 5;
+                int lastRow = 7;
 
                 foreach (DataRowView rowView in dataGrid.Items)
                 {
@@ -60,7 +68,7 @@ namespace Warehouse.Service
                     }
                 }
 
-                lastRow = 5;
+                lastRow = 7;
 
                 foreach (DictionaryEntry entry in productFromOrder)
                 {
@@ -80,7 +88,14 @@ namespace Warehouse.Service
                 var border = usedRange.Style.Border;
                 border.Left.Style = border.Right.Style = border.Top.Style = border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
 
-                excelPackage.Save();
+                try
+                {
+                    excelPackage.Save();
+                } catch (Exception)
+                {
+                    MessageBox.Show("Для открытия отчёта закройте Excel!");
+                }
+
             }
 
             Process.Start(filePath);
