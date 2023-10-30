@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -13,7 +14,7 @@ namespace Warehouse.Service
 {
     internal class OutputService
     {
-        public void ExportToExcel(DataGrid dataGrid, string filePath, string title, OrderedDictionary productFromOrder)
+        public void ExportToExcel(DataGrid dataGrid, string filePath, string title, OrderedDictionary productFromOrder, DateTime firstDate, DateTime secondDate)
         {
             using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(filePath)))
             {
@@ -25,25 +26,42 @@ namespace Warehouse.Service
                 ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
                 worksheet.PrinterSettings.Orientation = eOrientation.Landscape;
 
+                string dateRange = $"Период: {firstDate.ToString("yyyy-MM-dd")} - {secondDate.ToString("yyyy-MM-dd")}";
+
                 worksheet.Cells["A1:G1"].Merge = true;
                 worksheet.Cells["A1:G1"].Value = title;
                 worksheet.Cells["A1:G1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                worksheet.Cells["A2:G2"].Merge = true;
+                worksheet.Cells["A2:G2"].Value = dateRange;
+                worksheet.Cells["A2:G2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
 
                 for (int i = 0; i < dataGrid.Columns.Count; i++)
                 {
-                    worksheet.Cells[2, i + 1].Value = dataGrid.Columns[i].Header;
+                    worksheet.Cells[4, i + 1].Value = dataGrid.Columns[i].Header;
                 }
 
-                for (int row = 0; row < dataGrid.Items.Count; row++)
+                int lastRow = 5;
+
+                foreach (DataRowView rowView in dataGrid.Items)
                 {
-                    for (int col = 0; col < dataGrid.Columns.Count; col++)
+                    DataRow row = rowView.Row;
+
+                    DateTime orderDate = (DateTime)row["order_date"];
+
+                    if (orderDate >= firstDate && orderDate <= secondDate)
                     {
-                        var cellValue = (dataGrid.Items[row] as DataRowView)?.Row.ItemArray[col]?.ToString();
-                        worksheet.Cells[row + 3, col + 1].Value = cellValue;
+                        for (int col = 0; col < dataGrid.Columns.Count; col++)
+                        {
+                            var cellValue = row.ItemArray[col]?.ToString();
+                            worksheet.Cells[lastRow, col + 1].Value = cellValue;
+                        }
+
+                        lastRow++;
                     }
                 }
 
-                int lastRow = 3;
+                lastRow = 5;
+
                 foreach (DictionaryEntry entry in productFromOrder)
                 {
                     long orderId = (long)entry.Key;

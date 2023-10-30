@@ -97,5 +97,63 @@
             Margin="0 150 0 0"
             Click="Disposal_Click">
         </Button>
+        <DatePicker 
+            x:Name="FirstDate"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Height="40px"
+            Width="225px"
+            Margin="0 0 0 80" 
+            Grid.Row="4"
+            Grid.Column="4"
+            Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+            Visibility="Collapsed"
+            BorderBrush="#BC989393"/>
+        <DatePicker 
+            x:Name="SecondDate"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Height="40px"
+            Width="225px"
+            Margin="0 20 0 0" 
+            Grid.Row="4"
+            Grid.Column="4"
+            Visibility="Collapsed"
+            Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+            BorderBrush="#BC989393"/>
+        <Button
+            x:Name="ConfirmProduct"
+            Visibility="Collapsed"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Изменить"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 170 0 0"
+            Click="ConfirmProduct_Click">
+        </Button>
+        <Button
+            x:Name="ReturnProduct"
+            Visibility="Collapsed"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вернуться"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 170 120 0"
+            Click="ReturnProduct_Click">
+        </Button>
     </Grid>
 </Window>

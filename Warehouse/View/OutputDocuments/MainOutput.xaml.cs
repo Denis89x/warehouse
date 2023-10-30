@@ -1,10 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using Warehouse.Service;
 
 namespace Warehouse.View.OutputDocuments
 {
-
     public partial class MainOutput : Window
     {
         private OutputService outputService;
@@ -13,6 +13,7 @@ namespace Warehouse.View.OutputDocuments
         Database database;
 
         private string filePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Template.xlsx";
+        private string DisposalfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Disposal.xlsx";
 
         public MainOutput(DataGrid dataGrid)
         {
@@ -37,7 +38,34 @@ namespace Warehouse.View.OutputDocuments
 
         private void ProductFlowReport_Click(object sender, RoutedEventArgs e)
         {
-            outputService.ExportToExcel(dataGrid, filePath, "Отчёт о движении продуктов", database.GetProductWithOrderId());
+            ProductFlowReport.Visibility = Visibility.Collapsed;
+            Receipt.Visibility = Visibility.Collapsed;
+            Disposal.Visibility = Visibility.Collapsed;
+
+            FirstDate.Visibility = Visibility.Visible;
+            SecondDate.Visibility = Visibility.Visible;
+            ConfirmProduct.Visibility = Visibility.Visible;
+            ReturnProduct.Visibility = Visibility.Visible;
+        }
+
+        private void ReturnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmProduct.Visibility = Visibility.Collapsed;
+            ReturnProduct.Visibility = Visibility.Collapsed;
+            FirstDate.Visibility = Visibility.Collapsed;
+            SecondDate.Visibility = Visibility.Collapsed;
+
+            ProductFlowReport.Visibility = Visibility.Visible;
+            Receipt.Visibility = Visibility.Visible;
+            Disposal.Visibility = Visibility.Visible;
+        }
+
+        private void ConfirmProduct_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime firstDate = FirstDate.SelectedDate.Value;
+            DateTime secondDate = SecondDate.SelectedDate.Value;
+
+            outputService.ExportToExcel(dataGrid, filePath, "Отчёт о движении продуктов", database.GetProductWithOrderId(firstDate, secondDate), firstDate, secondDate);
         }
     }
 }

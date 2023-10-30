@@ -132,15 +132,19 @@ namespace Warehouse
             Connection();
         }
 
-        public OrderedDictionary GetProductWithOrderId()
+        public OrderedDictionary GetProductWithOrderId(DateTime firstDate, DateTime secondDate)
         {
             OrderedDictionary productFromOrder = new OrderedDictionary();
 
-            string query = @"
-                SELECT ord.order_id, product.product_id, product.title
-                FROM ord
-                JOIN order_composition ON ord.order_id = order_composition.order_id
-                JOIN product ON order_composition.product_id = product.product_id";
+            MessageBox.Show($"firstDate : {firstDate}, secondDate: {secondDate}");
+            MessageBox.Show($"firstDate : {firstDate.ToString("yyyy-MM-dd")}, secondDate: {secondDate.ToString("yyyy-MM-dd")}");
+
+            string query = $@"
+                            SELECT ord.order_id, product.product_id, product.title
+                            FROM ord
+                            JOIN order_composition ON ord.order_id = order_composition.order_id
+                            JOIN product ON order_composition.product_id = product.product_id
+                            WHERE ord.order_date >= '{firstDate.ToString("yyyy-MM-dd")}' AND ord.order_date <= '{secondDate.ToString("yyyy-MM-dd")}'";
 
             DataTable result = Select(query);
 
@@ -172,7 +176,6 @@ namespace Warehouse
             }
 
             return productFromOrder;
-            /*ShowProductFromOrder(productFromOrder);*/
         }
 
         public void ShowProductFromOrder(OrderedDictionary productFromOrder)
