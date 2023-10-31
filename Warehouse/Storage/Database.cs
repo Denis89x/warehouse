@@ -147,7 +147,6 @@ namespace Warehouse
 
         public OrderedDictionary ProductIdDateWithType(DateTime firstDate, DateTime secondDate, string type)
         {
-            MessageBox.Show($"Тип: {type}");
             string queryWithProductIdDate = $@"
                             SELECT ord.order_id, product.product_id, product.title
                             FROM ord
@@ -157,6 +156,36 @@ namespace Warehouse
                             AND ord.order_type = N'{type}'";
 
             return GetProductWithOrderId(queryWithProductIdDate);
+        }
+
+        public DataTable GetOrderComposition()
+        {
+            string query = $@"SELECT product.title, order_composition.quantity, ord.order_type
+                FROM order_composition, ord, product
+                where ord.order_id = order_composition.order_id
+                and order_composition.product_id = product.product_id";
+
+            DataTable result = Select(query);
+            DataTable newTable = new DataTable();
+            newTable.Columns.Add("Название", typeof(string));
+            newTable.Columns.Add("Приход", typeof(int));
+            newTable.Columns.Add("Расход", typeof(int));
+
+            foreach (DataRow row in result.Rows)
+            {
+                string title = row["title"].ToString();
+                int quantity = int.Parse(row["quantity"].ToString());
+                string orderType = row["order_type"].ToString();
+
+                DataRow newRow = newTable.NewRow();
+                newRow["Название"] = title;
+                newRow["Приход"] = orderType == "Поступление" ? quantity : 0;
+                newRow["Расход"] = orderType == "Выбытие" ? quantity : 0;
+
+                newTable.Rows.Add(newRow);
+            }
+
+            return newTable;
         }
 
         public OrderedDictionary GetProductWithOrderId(string query)

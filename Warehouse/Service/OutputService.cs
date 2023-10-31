@@ -39,16 +39,19 @@ namespace Warehouse.Service
                 worksheet.Cells["A3:G3"].Value = "ОАО Гомельский Мясокомбинат";
                 worksheet.Cells["A3:G3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
                 worksheet.Cells["A4:G4"].Merge = true;
-                worksheet.Cells["A4:G4"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A4:G4"].Value = "Главный склад";
                 worksheet.Cells["A4:G4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
                 worksheet.Cells["A5:G5"].Merge = true;
+                worksheet.Cells["A5:G5"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A5:G5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A6:G6"].Merge = true;
 
                 for (int i = 0; i < dataGrid.Columns.Count; i++)
                 {
-                    worksheet.Cells[6, i + 1].Value = dataGrid.Columns[i].Header;
+                    worksheet.Cells[7, i + 1].Value = dataGrid.Columns[i].Header;
                 }
 
-                int lastRow = 7;
+                int lastRow = 8;
 
                 foreach (DataRowView rowView in dataGrid.Items)
                 {
@@ -68,7 +71,7 @@ namespace Warehouse.Service
                     }
                 }
 
-                lastRow = 7;
+                lastRow = 8;
 
                 foreach (DictionaryEntry entry in productFromOrder)
                 {
@@ -125,16 +128,19 @@ namespace Warehouse.Service
                 worksheet.Cells["A3:G3"].Value = "ОАО Гомельский Мясокомбинат";
                 worksheet.Cells["A3:G3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
                 worksheet.Cells["A4:G4"].Merge = true;
-                worksheet.Cells["A4:G4"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A4:G4"].Value = "Главный склад";
                 worksheet.Cells["A4:G4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
                 worksheet.Cells["A5:G5"].Merge = true;
+                worksheet.Cells["A5:G5"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A5:G5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A6:G6"].Merge = true;
 
                 for (int i = 0; i < dataGrid.Columns.Count; i++)
                 {
-                    worksheet.Cells[6, i + 1].Value = dataGrid.Columns[i].Header;
+                    worksheet.Cells[7, i + 1].Value = dataGrid.Columns[i].Header;
                 }
 
-                int lastRow = 7;
+                int lastRow = 8;
 
                 foreach (DataRowView rowView in dataGrid.Items)
                 {
@@ -158,7 +164,7 @@ namespace Warehouse.Service
                     }
                 }
 
-                lastRow = 7;
+                lastRow = 8;
 
                 foreach (DictionaryEntry entry in productFromOrder)
                 {
@@ -192,6 +198,70 @@ namespace Warehouse.Service
 
             Process.Start(filePath);
         }
+
+        public void ExportDataTableToExcel(DataTable dataTable, string filePath, string title)
+        {
+            using (ExcelPackage excelPackage = new ExcelPackage(new FileInfo(filePath)))
+            {
+                if (excelPackage.Workbook.Worksheets.Any(x => x.Name.Equals("Карточка")))
+                {
+                    excelPackage.Workbook.Worksheets.Delete("Карточка");
+                }
+
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Карточка");
+                worksheet.PrinterSettings.Orientation = eOrientation.Landscape;
+
+                worksheet.Cells["A1:C1"].Merge = true;
+                worksheet.Cells["A1:C1"].Value = title;
+                worksheet.Cells["A1:C1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                worksheet.Cells["A2:C2"].Merge = true;
+                worksheet.Cells["A2:C2"].Value = "ОАО Гомельский Мясокомбинат";
+                worksheet.Cells["A2:C2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A3:C3"].Merge = true;
+                worksheet.Cells["A3:C3"].Value = "Главный склад";
+                worksheet.Cells["A3:C3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A4:C4"].Merge = true;
+                worksheet.Cells["A4:C4"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A4:C4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A5:C5"].Merge = true;
+
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    worksheet.Cells[6, i + 1].Value = dataTable.Columns[i].ColumnName;
+                    worksheet.Column(i + 1).Width = 20; // Установка ширины ячейки
+                }
+
+                int lastRow = 7;
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    for (int col = 0; col < dataTable.Columns.Count; col++)
+                    {
+                        var cellValue = row.ItemArray[col]?.ToString();
+                        worksheet.Cells[lastRow, col + 1].Value = cellValue;
+                    }
+
+                    lastRow++;
+                }
+
+                var usedRange = worksheet.Cells[worksheet.Dimension.Address];
+                var border = usedRange.Style.Border;
+                border.Left.Style = border.Right.Style = border.Top.Style = border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+                try
+                {
+                    excelPackage.Save();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Для открытия отчёта закройте Excel!");
+                    return;
+                }
+            }
+
+            Process.Start(filePath);
+        }
+
 
         public void Receipt(DataGrid dataGrid, string filePath, string title, OrderedDictionary productFromOrder, DateTime firstDate, DateTime secondDate)
         {

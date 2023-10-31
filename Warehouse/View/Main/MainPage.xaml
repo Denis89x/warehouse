@@ -78,7 +78,7 @@
                     <DataGridTextColumn Header="Сумма" Width="*"  Binding="{Binding amount}"/>
                     <DataGridTextColumn Header="Дата" Width="*"  Binding="{Binding order_date, StringFormat=dd.MM.yyyy}"/>
                     <DataGridTextColumn Header="Тип" Width="*"  Binding="{Binding order_type}"/>
-                    <DataGridTemplateColumn Header="Товары" Width="*" >
+                    <DataGridTemplateColumn Header="Продукты" Width="*" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ItemsControl ItemsSource="{Binding product}">

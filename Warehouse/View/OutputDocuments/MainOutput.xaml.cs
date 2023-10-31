@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using Warehouse.Service;
@@ -15,6 +16,7 @@ namespace Warehouse.View.OutputDocuments
         private string filePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Template.xlsx";
         private string DisposalfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Disposal.xlsx";
         private string ReceiptfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Receipt.xlsx";
+        private string CardfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Card.xlsx";
 
         public MainOutput(DataGrid dataGrid)
         {
@@ -33,6 +35,7 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Collapsed;
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
+            Card.Visibility = Visibility.Collapsed;
 
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
@@ -47,6 +50,7 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Collapsed;
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
+            Card.Visibility = Visibility.Collapsed;
 
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
@@ -61,12 +65,18 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Collapsed;
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
+            Card.Visibility = Visibility.Collapsed;
 
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
             ConfirmProduct.Visibility = Visibility.Visible;
             ReturnProduct.Visibility = Visibility.Visible;
             PeriodLAbel.Visibility = Visibility.Visible;
+        }
+
+        private void Card_Click(object sender, RoutedEventArgs e)
+        {
+            outputService.ExportDataTableToExcel(database.GetOrderComposition(), CardfilePath, "Карточка складского учёта");
         }
 
         private void ReturnProduct_Click(object sender, RoutedEventArgs e)
@@ -83,6 +93,7 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Visible;
             Disposal.Visibility = Visibility.Visible;
             OutputDoc.Visibility = Visibility.Visible;
+            Card.Visibility = Visibility.Visible;
         }
 
         private void ConfirmProduct_Click(object sender, RoutedEventArgs e)
@@ -95,7 +106,6 @@ namespace Warehouse.View.OutputDocuments
 
         private void ConfirmReceipt_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Поступление");
             DateTime firstDate = FirstDate.SelectedDate.Value;
             DateTime secondDate = SecondDate.SelectedDate.Value;
 
@@ -104,11 +114,10 @@ namespace Warehouse.View.OutputDocuments
 
         private void ConfirmDisposal_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Выбытие");
             DateTime firstDate = FirstDate.SelectedDate.Value;
             DateTime secondDate = SecondDate.SelectedDate.Value;
 
-            outputService.Disposal(dataGrid, ReceiptfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
+            outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
         }
     }
 }
