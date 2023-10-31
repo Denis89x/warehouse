@@ -16,5 +16,5 @@ C:\Производственная практика\Warehouse\Warehouse\App.xam
 33-1919763596
 Auth\AuthPage.xaml;Auth\MainWindow.xaml;Profile\PrfSettings.xaml;View\AddPage\AddFromComboBoxOrder.xaml;View\AddPage\OrderAdd.xaml;View\AddPage\ProductAdd.xaml;View\AddPage\ProductType.xaml;View\AddPage\SupplierAdd.xaml;View\EditPage\OrderEdit.xaml;View\EditPage\ProductEdit.xaml;View\EditPage\ProductTypeEdit.xaml;View\EditPage\SupplierEdit.xaml;View\FIltrationAndSearch\Filtration.xaml;View\FIltrationAndSearch\Search.xaml;View\Main\MainPage.xaml;View\OutputDocuments\MainOutput.xaml;
 
-False
+True
 

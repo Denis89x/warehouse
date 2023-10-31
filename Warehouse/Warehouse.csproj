@@ -252,6 +252,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\Disposal.xlsx" />
+    <None Include="Resources\Receipt.xlsx" />
     <None Include="Resources\Template.xlsx" />
   </ItemGroup>
   <ItemGroup>

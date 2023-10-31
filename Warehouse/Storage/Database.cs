@@ -18,6 +18,7 @@ namespace Warehouse
     {
         static string connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=warehouse;Integrated Security=True;Connect Timeout=30;Encrypt=False";
         SqlConnection sqlConnection = new SqlConnection(connection);
+
         private string selectProductType = $"select product_type_id, type_name from product_type";
         private string selectProductAll = $"select product_id, title from product";
         private string selectProduct = $"select product.product_id, product_type.type_name, product.presence, product.cost, product.description, product.title  from product, product_type WHERE product.product_type_id = product_type.product_type_id";
@@ -132,19 +133,35 @@ namespace Warehouse
             Connection();
         }
 
-        public OrderedDictionary GetProductWithOrderId(DateTime firstDate, DateTime secondDate)
+        public OrderedDictionary ProductIdDate(DateTime firstDate, DateTime secondDate)
         {
-            OrderedDictionary productFromOrder = new OrderedDictionary();
-
-            MessageBox.Show($"firstDate : {firstDate}, secondDate: {secondDate}");
-            MessageBox.Show($"firstDate : {firstDate.ToString("yyyy-MM-dd")}, secondDate: {secondDate.ToString("yyyy-MM-dd")}");
-
-            string query = $@"
+            string queryWithProductIdDate = $@"
                             SELECT ord.order_id, product.product_id, product.title
                             FROM ord
                             JOIN order_composition ON ord.order_id = order_composition.order_id
                             JOIN product ON order_composition.product_id = product.product_id
                             WHERE ord.order_date >= '{firstDate.ToString("yyyy-MM-dd")}' AND ord.order_date <= '{secondDate.ToString("yyyy-MM-dd")}'";
+
+            return GetProductWithOrderId(queryWithProductIdDate);
+        }
+
+        public OrderedDictionary ProductIdDateWithType(DateTime firstDate, DateTime secondDate, string type)
+        {
+            MessageBox.Show($"Тип: {type}");
+            string queryWithProductIdDate = $@"
+                            SELECT ord.order_id, product.product_id, product.title
+                            FROM ord
+                            JOIN order_composition ON ord.order_id = order_composition.order_id
+                            JOIN product ON order_composition.product_id = product.product_id
+                            WHERE ord.order_date >= '{firstDate.ToString("yyyy-MM-dd")}' AND ord.order_date <= '{secondDate.ToString("yyyy-MM-dd")}'
+                            AND ord.order_type = N'{type}'";
+
+            return GetProductWithOrderId(queryWithProductIdDate);
+        }
+
+        public OrderedDictionary GetProductWithOrderId(string query)
+        {
+            OrderedDictionary productFromOrder = new OrderedDictionary();
 
             DataTable result = Select(query);
 
