@@ -27,16 +27,6 @@ namespace Warehouse.View.AddPage
             add.ShowDialog();
         }
 
-        private void NextToAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ReturnToMain_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

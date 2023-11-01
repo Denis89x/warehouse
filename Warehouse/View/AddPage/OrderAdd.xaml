@@ -97,22 +97,7 @@
             Grid.Column="4"
             Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
             BorderBrush="#BC989393"/>
-        <Button
-            x:Name="NextToAdd"
-            Width="105px"
-            Height="45px"
-            materialDesign:ButtonAssist.CornerRadius="20"
-            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            Background="#FF249AD7"
-            BorderBrush="Transparent"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Content="Дальше"
-            RenderOptions.EdgeMode="Aliased"
-            Margin="120 290 0 0"
-            Click="NextToAdd_Click">
-        </Button>
+        
         <Button
             x:Name="ReturnToMain"
             Width="105px"

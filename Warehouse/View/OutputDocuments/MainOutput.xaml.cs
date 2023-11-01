@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Warehouse.DTO;
 using Warehouse.Service;
 
 namespace Warehouse.View.OutputDocuments
@@ -25,6 +26,8 @@ namespace Warehouse.View.OutputDocuments
             outputService = new OutputService();
 
             database = new Database();
+
+            database.ReadProductToComboBox(ProductComboBox);
 
             this.dataGrid = dataGrid;
         }
@@ -76,7 +79,14 @@ namespace Warehouse.View.OutputDocuments
 
         private void Card_Click(object sender, RoutedEventArgs e)
         {
-            outputService.ExportDataTableToExcel(database.GetOrderComposition(), CardfilePath, "Карточка складского учёта");
+            ProductFlowReport.Visibility = Visibility.Collapsed;
+            Receipt.Visibility = Visibility.Collapsed;
+            Disposal.Visibility = Visibility.Collapsed;
+            Card.Visibility = Visibility.Collapsed;
+
+            ConfirmCard.Visibility = Visibility.Visible;
+            ReturnProduct.Visibility = Visibility.Visible;
+            ProductComboBox.Visibility = Visibility.Visible;
         }
 
         private void ReturnProduct_Click(object sender, RoutedEventArgs e)
@@ -88,6 +98,8 @@ namespace Warehouse.View.OutputDocuments
             PeriodLAbel.Visibility = Visibility.Collapsed;
             ConfirmReceipt.Visibility = Visibility.Collapsed;
             ConfirmDisposal.Visibility = Visibility.Collapsed;
+            ConfirmCard.Visibility = Visibility.Collapsed;
+            ProductComboBox.Visibility = Visibility.Collapsed;
 
             ProductFlowReport.Visibility = Visibility.Visible;
             Receipt.Visibility = Visibility.Visible;
@@ -118,6 +130,13 @@ namespace Warehouse.View.OutputDocuments
             DateTime secondDate = SecondDate.SelectedDate.Value;
 
             outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
+        }
+
+        private void ConfirmCard_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxDTO product = (ComboBoxDTO)ProductComboBox.SelectedItem;
+
+            outputService.ExportDataTableToExcel(database.GetOrderComposition(product.name), CardfilePath, "Карточка складского учёта");
         }
     }
 }

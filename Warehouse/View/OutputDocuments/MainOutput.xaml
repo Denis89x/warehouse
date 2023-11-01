@@ -216,5 +216,34 @@
             Margin="120 170 0 0"
             Click="ConfirmDisposal_Click">
         </Button>
+        <ComboBox
+            x:Name="ProductComboBox"
+            Width="225px"
+            Visibility="Collapsed"
+            Height="40px"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Margin="0 0 0 20"
+            materialDesign:HintAssist.Hint="Продукт"
+            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+            BorderBrush="#BC989393">
+        </ComboBox>
+        <Button
+            x:Name="ConfirmCard"
+            Visibility="Collapsed"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вывести"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 170 0 0"
+            Click="ConfirmCard_Click">
+        </Button>
     </Grid>
 </Window>

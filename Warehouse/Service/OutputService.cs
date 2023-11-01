@@ -211,27 +211,30 @@ namespace Warehouse.Service
                 ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Карточка");
                 worksheet.PrinterSettings.Orientation = eOrientation.Landscape;
 
-                worksheet.Cells["A1:C1"].Merge = true;
-                worksheet.Cells["A1:C1"].Value = title;
-                worksheet.Cells["A1:C1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                worksheet.Cells["A2:C2"].Merge = true;
-                worksheet.Cells["A2:C2"].Value = "ОАО Гомельский Мясокомбинат";
-                worksheet.Cells["A2:C2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                worksheet.Cells["A3:C3"].Merge = true;
-                worksheet.Cells["A3:C3"].Value = "Главный склад";
-                worksheet.Cells["A3:C3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                worksheet.Cells["A4:C4"].Merge = true;
-                worksheet.Cells["A4:C4"].Value = "Адрес: Гомель, ул. Ильича, 2";
-                worksheet.Cells["A4:C4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-                worksheet.Cells["A5:C5"].Merge = true;
+                worksheet.Cells["A1:D1"].Merge = true;
+                worksheet.Cells["A1:D1"].Value = title;
+                worksheet.Cells["A1:D1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                worksheet.Cells["A2:D2"].Merge = true;
+                worksheet.Cells["A2:D2"].Value = "ОАО Гомельский Мясокомбинат";
+                worksheet.Cells["A2:D2"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A3:D3"].Merge = true;
+                worksheet.Cells["A3:D3"].Value = $"Продукт: {dataTable.Rows[0]["Название"].ToString()}";
+                worksheet.Cells["A3:D3"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A4:D4"].Merge = true;
+                worksheet.Cells["A4:D4"].Value = "Главный склад";
+                worksheet.Cells["A4:D4"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A5:D5"].Merge = true;
+                worksheet.Cells["A5:D5"].Value = "Адрес: Гомель, ул. Ильича, 2";
+                worksheet.Cells["A5:D5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+                worksheet.Cells["A6:D6"].Merge = true;
 
                 for (int i = 0; i < dataTable.Columns.Count; i++)
                 {
-                    worksheet.Cells[6, i + 1].Value = dataTable.Columns[i].ColumnName;
+                    worksheet.Cells[7, i + 1].Value = dataTable.Columns[i].ColumnName;
                     worksheet.Column(i + 1).Width = 20; // Установка ширины ячейки
                 }
 
-                int lastRow = 7;
+                int lastRow = 8;
 
                 foreach (DataRow row in dataTable.Rows)
                 {
@@ -244,9 +247,12 @@ namespace Warehouse.Service
                     lastRow++;
                 }
 
-                var usedRange = worksheet.Cells[worksheet.Dimension.Address];
-                var border = usedRange.Style.Border;
+                var tableRange = worksheet.Cells[7, 1, lastRow - 1, dataTable.Columns.Count];
+                var border = tableRange.Style.Border;
                 border.Left.Style = border.Right.Style = border.Top.Style = border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+                lastRow++; 
+                worksheet.Cells[lastRow, 1].Value = "Составил: _______________";
 
                 try
                 {

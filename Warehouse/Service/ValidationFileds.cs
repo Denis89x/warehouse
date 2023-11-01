@@ -144,11 +144,10 @@ namespace Warehouse.Service
 
         public bool ValidationAddress(string address)
         {
-            string pattern = @"^[a-zA-Zа-яА-Я\s]{3,40}$";
 
-            if (!Regex.IsMatch(address, pattern))
+            if (address.Length < 3 || address.Length > 40)
             {
-                MessageBox.Show("Размер описания от 3 до 40 символов, без цифр и знаков!");
+                MessageBox.Show("Размер адресса от 3 до 40 символов!");
                 return false;
             }
 

@@ -158,18 +158,20 @@ namespace Warehouse
             return GetProductWithOrderId(queryWithProductIdDate);
         }
 
-        public DataTable GetOrderComposition()
+        public DataTable GetOrderComposition(string productName)
         {
             string query = $@"SELECT product.title, order_composition.quantity, ord.order_type
                 FROM order_composition, ord, product
                 where ord.order_id = order_composition.order_id
-                and order_composition.product_id = product.product_id";
+                and order_composition.product_id = product.product_id
+                and product.title = N'{productName}'";
 
             DataTable result = Select(query);
             DataTable newTable = new DataTable();
             newTable.Columns.Add("Название", typeof(string));
             newTable.Columns.Add("Приход", typeof(int));
             newTable.Columns.Add("Расход", typeof(int));
+            newTable.Columns.Add("Остаток", typeof(int));
 
             foreach (DataRow row in result.Rows)
             {
@@ -178,9 +180,30 @@ namespace Warehouse
                 string orderType = row["order_type"].ToString();
 
                 DataRow newRow = newTable.NewRow();
+
                 newRow["Название"] = title;
                 newRow["Приход"] = orderType == "Поступление" ? quantity : 0;
                 newRow["Расход"] = orderType == "Выбытие" ? quantity : 0;
+
+                int previousBalance = 0;
+
+                if (newTable.Rows.Count > 0)
+                {
+                    previousBalance = int.Parse(newTable.Rows[newTable.Rows.Count - 1]["Остаток"].ToString());
+                }
+
+                int currentBalance = previousBalance;
+
+                if (orderType == "Поступление")
+                {
+                    currentBalance += quantity;
+                }
+                else if (orderType == "Выбытие")
+                {
+                    currentBalance -= quantity;
+                }
+
+                newRow["Остаток"] = currentBalance;
 
                 newTable.Rows.Add(newRow);
             }
@@ -238,10 +261,9 @@ namespace Warehouse
                 foreach (Product product in products)
                 {
                     message.AppendLine($"Product ID: {product.id}, Title: {product.title}");
-                    // Добавьте другие свойства продукта, если необходимо
                 }
 
-                message.AppendLine(); // Пустая строка между заказами
+                message.AppendLine();
             }
 
             MessageBox.Show(message.ToString());
@@ -449,9 +471,10 @@ namespace Warehouse
             foreach (DataRow row in orderTable.Rows)
             {
                 long orderId = (long)row["order_id"];
-                string query = $"SELECT product.title FROM product JOIN order_composition ON product.product_id = order_composition.product_id WHERE order_composition.order_id = {orderId}";
+                string query = $"SELECT concat(product.title ,' ', quantity) as title FROM product JOIN order_composition ON product.product_id = order_composition.product_id WHERE order_composition.order_id = {orderId}";
 
                 DataTable productTable = Select(query);
+                
                 row["product"] = productTable;
             }
             Connection();
