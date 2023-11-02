@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using Warehouse.DTO;
@@ -10,6 +9,7 @@ namespace Warehouse.View.OutputDocuments
     public partial class MainOutput : Window
     {
         private OutputService outputService;
+        private ValidationFileds validationFileds;
 
         DataGrid dataGrid;
         Database database;
@@ -18,6 +18,7 @@ namespace Warehouse.View.OutputDocuments
         private string DisposalfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Disposal.xlsx";
         private string ReceiptfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Receipt.xlsx";
         private string CardfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Card.xlsx";
+        private string OrderfilePath = "C:\\Производственная практика\\Warehouse\\Warehouse\\Resources\\Order.xlsx";
 
         public MainOutput(DataGrid dataGrid)
         {
@@ -28,8 +29,12 @@ namespace Warehouse.View.OutputDocuments
             database = new Database();
 
             database.ReadProductToComboBox(ProductComboBox);
+            database.ReadOrderToComboBox(OrderComboBox);
 
             this.dataGrid = dataGrid;
+            validationFileds = new ValidationFileds();
+            SecondDate.SelectedDate = DateTime.Today;
+            FirstDate.SelectedDate = DateTime.Today;
         }
 
         private void Disposal_Click(object sender, RoutedEventArgs e)
@@ -38,8 +43,11 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Collapsed;
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
+            Order.Visibility = Visibility.Collapsed;
             Card.Visibility = Visibility.Collapsed;
+            MainBorder.Visibility = Visibility.Collapsed;
 
+            SecondBorder.Visibility = Visibility.Visible;
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
             ConfirmDisposal.Visibility = Visibility.Visible;
@@ -54,6 +62,10 @@ namespace Warehouse.View.OutputDocuments
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
             Card.Visibility = Visibility.Collapsed;
+            Order.Visibility = Visibility.Collapsed;
+            MainBorder.Visibility = Visibility.Collapsed;
+
+            SecondBorder.Visibility = Visibility.Visible;
 
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
@@ -69,6 +81,10 @@ namespace Warehouse.View.OutputDocuments
             Disposal.Visibility = Visibility.Collapsed;
             OutputDoc.Visibility = Visibility.Collapsed;
             Card.Visibility = Visibility.Collapsed;
+            Order.Visibility = Visibility.Collapsed;
+            MainBorder.Visibility = Visibility.Collapsed;
+
+            SecondBorder.Visibility = Visibility.Visible;
 
             FirstDate.Visibility = Visibility.Visible;
             SecondDate.Visibility = Visibility.Visible;
@@ -83,10 +99,32 @@ namespace Warehouse.View.OutputDocuments
             Receipt.Visibility = Visibility.Collapsed;
             Disposal.Visibility = Visibility.Collapsed;
             Card.Visibility = Visibility.Collapsed;
+            MainBorder.Visibility = Visibility.Collapsed;
+            Order.Visibility = Visibility.Collapsed;
+            OutputDoc.Visibility = Visibility.Collapsed;
 
+            SecondBorder.Visibility = Visibility.Visible;
             ConfirmCard.Visibility = Visibility.Visible;
             ReturnProduct.Visibility = Visibility.Visible;
             ProductComboBox.Visibility = Visibility.Visible;
+            OutCardAndOrder.Visibility = Visibility.Visible;
+        }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+            ProductFlowReport.Visibility = Visibility.Collapsed;
+            Receipt.Visibility = Visibility.Collapsed;
+            Disposal.Visibility = Visibility.Collapsed;
+            Card.Visibility = Visibility.Collapsed;
+            MainBorder.Visibility = Visibility.Collapsed;
+            Order.Visibility = Visibility.Collapsed;
+            OutputDoc.Visibility = Visibility.Collapsed;
+
+            SecondBorder.Visibility = Visibility.Visible;
+            OrderComboBox.Visibility = Visibility.Visible;
+            ConfirmOrder.Visibility = Visibility.Visible;
+            ReturnProduct.Visibility = Visibility.Visible;
+            OutCardAndOrder.Visibility = Visibility.Visible;
         }
 
         private void ReturnProduct_Click(object sender, RoutedEventArgs e)
@@ -100,7 +138,13 @@ namespace Warehouse.View.OutputDocuments
             ConfirmDisposal.Visibility = Visibility.Collapsed;
             ConfirmCard.Visibility = Visibility.Collapsed;
             ProductComboBox.Visibility = Visibility.Collapsed;
+            SecondBorder.Visibility = Visibility.Collapsed;
+            OrderComboBox.Visibility = Visibility.Collapsed;
+            ConfirmOrder.Visibility = Visibility.Collapsed;
+            OutCardAndOrder.Visibility = Visibility.Collapsed;
 
+            Order.Visibility = Visibility.Visible;
+            MainBorder.Visibility = Visibility.Visible;
             ProductFlowReport.Visibility = Visibility.Visible;
             Receipt.Visibility = Visibility.Visible;
             Disposal.Visibility = Visibility.Visible;
@@ -110,18 +154,29 @@ namespace Warehouse.View.OutputDocuments
 
         private void ConfirmProduct_Click(object sender, RoutedEventArgs e)
         {
-            DateTime firstDate = FirstDate.SelectedDate.Value;
-            DateTime secondDate = SecondDate.SelectedDate.Value;
-
-            outputService.ExportToExcel(dataGrid, filePath, "Отчёт о движении продуктов", database.ProductIdDate(firstDate, secondDate), firstDate, secondDate);
+            try
+            {
+                if (validationFileds.ValidationDatePeriod(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value))
+                {
+                    outputService.ExportToExcel(dataGrid, filePath, "Отчёт о движении продуктов", database.ProductIdDate(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value), FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Выберите дату!");
+            }
         }
+
 
         private void ConfirmReceipt_Click(object sender, RoutedEventArgs e)
         {
             DateTime firstDate = FirstDate.SelectedDate.Value;
             DateTime secondDate = SecondDate.SelectedDate.Value;
 
-            outputService.Receipt(dataGrid, ReceiptfilePath, "Реестр документов по поступлению", database.ProductIdDateWithType(firstDate, secondDate, "Поступление"), firstDate, secondDate);
+            if (validationFileds.ValidationDatePeriod(firstDate, secondDate))
+            {
+                outputService.Receipt(dataGrid, ReceiptfilePath, "Реестр документов по поступлению", database.ProductIdDateWithType(firstDate, secondDate, "Поступление"), firstDate, secondDate);
+            }
         }
 
         private void ConfirmDisposal_Click(object sender, RoutedEventArgs e)
@@ -129,14 +184,32 @@ namespace Warehouse.View.OutputDocuments
             DateTime firstDate = FirstDate.SelectedDate.Value;
             DateTime secondDate = SecondDate.SelectedDate.Value;
 
-            outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
+            if (validationFileds.ValidationDatePeriod(firstDate, secondDate))
+            {
+                outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
+
+            }
         }
 
         private void ConfirmCard_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxDTO product = (ComboBoxDTO)ProductComboBox.SelectedItem;
 
-            outputService.ExportDataTableToExcel(database.GetOrderComposition(product.name), CardfilePath, "Карточка складского учёта");
+            if (validationFileds.ValidationComboBoxProduct(product, "продукт"))
+            {
+                outputService.ExportDataTableToExcel(database.GetOrderComposition(product.name), CardfilePath, "Карточка складского учёта");
+
+            }
+        }
+
+        private void ConfirmOrder_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxDTO order = (ComboBoxDTO)OrderComboBox.SelectedItem;
+
+            if (validationFileds.ValidationComboBoxProduct(order, "заказ"))
+            {
+                outputService.ExportDataTableToExcelOrder(database.GetSupplier(database.GetSupplierId(order.id)), database.GetOrderWithOrderId(order.id), OrderfilePath, $"Информация о заказе: {order.id}", database.ProductsForOrder(order.id));
+            }
         }
     }
 }

@@ -246,6 +246,7 @@
     </None>
     <None Include="Resources\Card.xlsx" />
     <None Include="Resources\Disposal.xlsx" />
+    <None Include="Resources\Order.xlsx" />
     <None Include="Resources\Receipt.xlsx" />
     <None Include="Resources\Template.xlsx" />
   </ItemGroup>

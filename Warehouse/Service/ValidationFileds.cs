@@ -1,6 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using Warehouse.DTO;
 
 namespace Warehouse.Service
@@ -61,6 +61,17 @@ namespace Warehouse.Service
 
             if (!ValidationMiddleName(middleName))
                 return false;
+
+            return true;
+        }
+
+        public bool ValidationDatePeriod(DateTime firstDate, DateTime secondDate)
+        {
+            if (firstDate < DateTime.Now.AddYears(-1) || secondDate > DateTime.Now.AddDays(1) || firstDate > secondDate || secondDate < firstDate)
+            {
+                MessageBox.Show("Укажите верный период времени!");
+                return false;
+            }
 
             return true;
         }

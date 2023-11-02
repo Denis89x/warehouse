@@ -27,9 +27,29 @@
         <Border 
             Background="White"
             CornerRadius="10" 
+            x:Name="MainBorder"
             BorderBrush="Black"
-            Height="310px" 
+            Height="380px" 
             Width="300px" 
+            Padding="10">
+            <Border.Effect>
+                <DropShadowEffect 
+                    ShadowDepth="0" 
+                    Color="Black" 
+                    Opacity="0.3" 
+                    BlurRadius="15" 
+                    Direction="360" 
+                    RenderingBias="Quality"/>
+            </Border.Effect>
+        </Border>
+        <Border 
+            Background="White"
+            CornerRadius="10" 
+            x:Name="SecondBorder"
+            BorderBrush="Black"
+            Height="280px" 
+            Width="300px" 
+            Visibility="Collapsed"
             Padding="10">
             <Border.Effect>
                 <DropShadowEffect 
@@ -48,7 +68,17 @@
             Content="Выходные документы"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="0 0 0 220">
+            Margin="0 0 0 280">
+        </Label>
+        <Label 
+            FontSize="18px"
+            Height="30px"
+            Visibility="Collapsed"
+            x:Name="OutCardAndOrder"
+            Content="Выберите из списка"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0 0 0 200">
         </Label>
         <Button
             x:Name="ProductFlowReport"
@@ -63,7 +93,7 @@
             VerticalAlignment="Center" 
             Content="Движение продуктов"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 0 0 100"
+            Margin="0 0 0 150"
             Click="ProductFlowReport_Click">
         </Button>
         <Button
@@ -79,7 +109,7 @@
             VerticalAlignment="Center" 
             Content="Реестр поступления"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 10 0 0"
+            Margin="0 0 0 40"
             Click="Receipt_Click">
         </Button>
         <Button
@@ -95,7 +125,7 @@
             VerticalAlignment="Center" 
             Content="Реестр выбытия"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 120 0 0"
+            Margin="0 70 0 0"
             Click="Disposal_Click">
         </Button>
         <Button
@@ -111,8 +141,24 @@
             VerticalAlignment="Center" 
             Content="Карточка С/У"
             RenderOptions.EdgeMode="Aliased"
-            Margin="0 230 0 0"
+            Margin="0 180 0 0"
             Click="Card_Click">
+        </Button>
+        <Button
+            x:Name="Order"
+            Width="200px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Заказ"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="0 290 0 0"
+            Click="Order_Click">
         </Button>
         <Label 
             FontSize="18px"
@@ -228,6 +274,18 @@
             Style="{StaticResource MaterialDesignOutlinedComboBox}"
             BorderBrush="#BC989393">
         </ComboBox>
+        <ComboBox
+            x:Name="OrderComboBox"
+            Width="225px"
+            Visibility="Collapsed"
+            Height="40px"
+            FontSize="15px"
+            Padding="12 0 12 0"
+            Margin="0 0 0 20"
+            materialDesign:HintAssist.Hint="Номера заказов"
+            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+            BorderBrush="#BC989393">
+        </ComboBox>
         <Button
             x:Name="ConfirmCard"
             Visibility="Collapsed"
@@ -244,6 +302,23 @@
             RenderOptions.EdgeMode="Aliased"
             Margin="120 170 0 0"
             Click="ConfirmCard_Click">
+        </Button>
+        <Button
+            x:Name="ConfirmOrder"
+            Visibility="Collapsed"
+            Width="105px"
+            Height="45px"
+            materialDesign:ButtonAssist.CornerRadius="20"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Background="#FF249AD7"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Content="Вывести"
+            RenderOptions.EdgeMode="Aliased"
+            Margin="120 170 0 0"
+            Click="ConfirmOrder_Click">
         </Button>
     </Grid>
 </Window>
