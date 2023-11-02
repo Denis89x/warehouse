@@ -170,24 +170,31 @@ namespace Warehouse.View.OutputDocuments
 
         private void ConfirmReceipt_Click(object sender, RoutedEventArgs e)
         {
-            DateTime firstDate = FirstDate.SelectedDate.Value;
-            DateTime secondDate = SecondDate.SelectedDate.Value;
-
-            if (validationFileds.ValidationDatePeriod(firstDate, secondDate))
+            try
             {
-                outputService.Receipt(dataGrid, ReceiptfilePath, "Реестр документов по поступлению", database.ProductIdDateWithType(firstDate, secondDate, "Поступление"), firstDate, secondDate);
+                if (validationFileds.ValidationDatePeriod(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value))
+                {
+                    outputService.Receipt(dataGrid, ReceiptfilePath, "Реестр документов по поступлению", database.ProductIdDateWithType(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value, "Поступление"), FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Выберите дату!");
             }
         }
 
         private void ConfirmDisposal_Click(object sender, RoutedEventArgs e)
         {
-            DateTime firstDate = FirstDate.SelectedDate.Value;
-            DateTime secondDate = SecondDate.SelectedDate.Value;
-
-            if (validationFileds.ValidationDatePeriod(firstDate, secondDate))
+            try
             {
-                outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(firstDate, secondDate, "Выбытие"), firstDate, secondDate);
-
+                if (validationFileds.ValidationDatePeriod(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value))
+                {
+                    outputService.Disposal(dataGrid, DisposalfilePath, "Реестр документов по выбытию", database.ProductIdDateWithType(FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value, "Выбытие"), FirstDate.SelectedDate.Value, SecondDate.SelectedDate.Value);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Выберите дату!");
             }
         }
 

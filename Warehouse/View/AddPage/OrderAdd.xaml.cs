@@ -63,16 +63,23 @@ namespace Warehouse.View.AddPage
         private void CompleteButton_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxDTO supplier = (ComboBoxDTO)SupplierComboBox.SelectedItem;
-            string orderDate = Date.SelectedDate.Value.ToString("yyyy-MM-dd");
-
-            ValidationFileds validation = new ValidationFileds();
-
-            if (validation.ValidationComboBoxProduct(supplier, "поставщика") && validation.ValidationComboBox(((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), "Тип заказа") && validation.ValidateAmount(ProductCost.Text))
+            try
             {
-                database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), ((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), orderDate);
-                DataTable orderTable = database.GetOrdersWithProducts();
-                grid.ItemsSource = orderTable.DefaultView;
-                this.Close();
+                string orderDate = Date.SelectedDate.Value.ToString("yyyy-MM-dd");
+
+                ValidationFileds validation = new ValidationFileds();
+
+                if (validation.ValidationComboBoxProduct(supplier, "поставщика") && validation.ValidationComboBox(((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), "Тип заказа") && validation.ValidateAmount(ProductCost.Text))
+                {
+                    database.CreateOrder(supplier, validation.CastCostToDouble(ProductCost.Text), ((ComboBoxItem)OrderTypeComboBox.SelectedItem).Content.ToString(), orderDate);
+                    DataTable orderTable = database.GetOrdersWithProducts();
+                    grid.ItemsSource = orderTable.DefaultView;
+                    this.Close();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Выберите дату!");
             }
         }
     }

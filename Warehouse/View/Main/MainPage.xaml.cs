@@ -284,6 +284,9 @@ namespace Warehouse.View.Main
 
             string field = filtration.Field;
 
+            if (field == null)
+                return;
+
             mainLogic.ApplyFilter(field, OrderGrid);
         }
 
@@ -293,6 +296,9 @@ namespace Warehouse.View.Main
             filtration.ShowDialog();
 
             string field = filtration.Field;
+
+            if (field == null)
+                return;
 
             mainLogic.ApplyFilter(field, ProductTypeGrid);
         }
@@ -304,6 +310,9 @@ namespace Warehouse.View.Main
 
             string field = filtration.Field;
 
+            if (field == null)
+                return;
+
             mainLogic.ApplyFilter(field, ProductGrid);
         }
 
@@ -314,6 +323,9 @@ namespace Warehouse.View.Main
 
             string field = filtration.Field;
 
+            if (field == null)
+                return;
+
             mainLogic.ApplyFilter(field, SupplierGrid);
         }
 
@@ -322,7 +334,12 @@ namespace Warehouse.View.Main
             Search search = new Search();
             search.ShowDialog();
 
-            mainLogic.SearchAndSort(search.Field, OrderGrid);
+            string field = search.Field;
+
+            if (field == null)
+                return;
+
+            mainLogic.SearchAndSort(field, OrderGrid);
         }
 
         private void SearchProductType_Click(object sender, RoutedEventArgs e)
@@ -330,7 +347,12 @@ namespace Warehouse.View.Main
             Search search = new Search();
             search.ShowDialog();
 
-            mainLogic.SearchAndSort(search.Field, ProductTypeGrid);
+            string field = search.Field;
+
+            if (field == null)
+                return;
+
+            mainLogic.SearchAndSort(field, ProductTypeGrid);
         }
 
         private void SearchSupplier_Click(object sender, RoutedEventArgs e)
@@ -338,7 +360,12 @@ namespace Warehouse.View.Main
             Search search = new Search();
             search.ShowDialog();
 
-            mainLogic.SearchAndSort(search.Field, SupplierGrid);
+            string field = search.Field;
+
+            if (field == null)
+                return;
+
+            mainLogic.SearchAndSort(field, SupplierGrid);
         }
 
         private void SearchProduct_Click(object sender, RoutedEventArgs e)
@@ -346,7 +373,12 @@ namespace Warehouse.View.Main
             Search search = new Search();
             search.ShowDialog();
 
-            mainLogic.SearchAndSort(search.Field, ProductGrid);
+            string field = search.Field;
+
+            if (field == null)
+                return;
+
+            mainLogic.SearchAndSort(field, ProductGrid);
         }
 
         private void OrderCancel_Click(object sender, RoutedEventArgs e)

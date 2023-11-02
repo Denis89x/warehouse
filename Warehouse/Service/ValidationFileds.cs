@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using Warehouse.DTO;
@@ -78,7 +79,7 @@ namespace Warehouse.Service
 
         private bool ValidationPhoneNumber(string phoneNumber)
         {
-            string pattern = @"^\+\d{12}$";
+            string pattern = @"^(\+375|80)(44|29|25|33)\d{7}$";
 
             if (!Regex.IsMatch(phoneNumber, pattern))
             {
@@ -211,11 +212,10 @@ namespace Warehouse.Service
 
         public bool ValidationProductDescription(string description)
         {
-            string pattern = @"^[a-zA-Zа-яА-Я\s]{3,60}$";
 
-            if (!Regex.IsMatch(description, pattern))
+            if (description.Length < 3 || description.Length > 60)
             {
-                MessageBox.Show("Размер описания от 3 до 60 символов, без цифр и знаков!");
+                MessageBox.Show("Размер описания от 3 до 60 символов!");
                 return false;
             }
 
@@ -240,12 +240,9 @@ namespace Warehouse.Service
 
         public bool ValidationCost(string cost)
         {
-            string pattern = @"^\d+$";
-
-            
-            if (double.TryParse(cost, out double costDouble))
+            if (int.TryParse(cost, out int costDouble))
             {
-                if (!Regex.IsMatch(costDouble.ToString(), pattern) || costDouble <= 0 || costDouble > 10000)
+                if (costDouble <= 0 || costDouble > 10000)
                 {
                     MessageBox.Show("Число должно быть больше 0 и не больше 10000");
                     return false;
@@ -261,7 +258,7 @@ namespace Warehouse.Service
 
         public bool ValidationProductTypeTitle(string title)
         {
-            string productTypePattern = @"^[a-zA-Zа-яА-Я]{3,30}$";
+            string productTypePattern = @"^(?![- ])(?!.*[- ]{2})[a-zA-Zа-яА-Я -]{3,30}(?<![- ])$";
 
             if (!Regex.IsMatch(title, productTypePattern))
             {
