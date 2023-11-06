@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Controls;
 using Warehouse.Profile;
 using Warehouse.Service;
 using Warehouse.Storage;

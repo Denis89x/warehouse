@@ -1,5 +1,4 @@
-﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,8 +11,6 @@ using Warehouse.DTO;
 using Warehouse.Model;
 using Warehouse.Service;
 using Warehouse.Storage;
-using Warehouse.View.AddPage;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Warehouse
 {

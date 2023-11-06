@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Warehouse.View.AddPage"
         mc:Ignorable="d"
         Height="600" Width="650"
+        Icon="/Resources/ColorIcon.png"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
